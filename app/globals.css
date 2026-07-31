@@ -61,6 +61,28 @@
   z-index: 0;
 }
 
+/* Fades the marquee out at both edges instead of hard-cutting at the viewport.
+   A mask is used rather than gradient overlays because the page background is a
+   fixed vignette — an opaque overlay would have to fake that gradient and would
+   visibly mismatch. Masking punches the text out and lets the real background
+   show through. -webkit- prefix is required for Safari. */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 9%,
+    #000 91%,
+    transparent 100%
+  );
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

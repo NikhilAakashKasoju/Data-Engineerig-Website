@@ -1,13 +1,14 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 
-const fadeUp = {
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 18 },
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
 };
 
-const stagger = {
+const stagger: Variants = {
   hidden: {},
   show: { transition: { staggerChildren: 0.14 } },
 };
@@ -16,6 +17,21 @@ const PIPE_PATH =
   "M170,200 C260,240 300,300 360,330 C430,365 480,300 560,255 C640,210 700,190 760,240 C830,300 900,320 970,270 C1020,235 1040,220 1060,210";
 
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+  const pipelineRef = useRef<SVGSVGElement>(null);
+
+  // The travelling dots use SVG SMIL (<animateMotion>), which the
+  // prefers-reduced-motion rule in globals.css cannot reach — that rule only
+  // overrides CSS animation/transition durations. Pausing the SVG's own
+  // timeline stops SMIL without changing the rendered markup, so there's no
+  // server/client hydration mismatch.
+  useEffect(() => {
+    const svg = pipelineRef.current;
+    if (!svg) return;
+    if (reduceMotion) svg.pauseAnimations();
+    else svg.unpauseAnimations();
+  }, [reduceMotion]);
+
   return (
     <>
       <nav className="sticky top-0 z-50 flex items-center justify-between px-12 py-5 bg-bg/70 backdrop-blur-md">
@@ -73,6 +89,7 @@ export default function Hero() {
           </motion.h1>
 
           <svg
+            ref={pipelineRef}
             className="absolute top-10 left-0 w-full h-full z-[2] pointer-events-none"
             viewBox="0 0 1200 520"
             preserveAspectRatio="xMidYMid meet"
@@ -135,7 +152,7 @@ export default function Hero() {
         </motion.p>
 
         <motion.div variants={fadeUp} className="flex items-center gap-4 mt-8 relative z-[3]">
-          <button className="btn-primary inline-flex items-center gap-2.5 font-semibold text-[15px] text-white px-6.5 py-4 rounded-full bg-gradient-to-br from-purple to-[#a24bff]">
+          <button className="btn-primary inline-flex items-center gap-2.5 font-semibold text-[15px] text-white px-[26px] py-4 rounded-full bg-gradient-to-br from-purple to-[#a24bff]">
             Enroll in the Course
             <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4">
               <path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

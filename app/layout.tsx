@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import MotionProvider from "@/components/MotionProvider";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -33,7 +34,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="bg-glow" />
         <div className="bg-grid" />
         <div className="bg-fade" />
-        {children}
+        <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
   );

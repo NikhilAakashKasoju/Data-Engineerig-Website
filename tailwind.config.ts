@@ -29,10 +29,15 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-8px)" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         fadeUp: "fadeUp 0.8s ease forwards",
         floaty: "floaty 5s ease-in-out infinite",
+        marquee: "marquee 42s linear infinite",
       },
     },
   },
