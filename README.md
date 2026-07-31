@@ -20,6 +20,7 @@ Open http://localhost:3000
 - `components/Marquee.tsx` — infinite keyword band
 - `components/Curriculum.tsx` — five alternating module rows
 - `components/Connector.tsx` — scroll-scrubbed teal arrow drawn between modules
+- `components/Pricing.tsx` — raised offer panel
 - `app/globals.css` — Tailwind entry + bespoke effects (animated gradient button border, background vignette)
 - `tailwind.config.ts` — design tokens (colors, fonts, keyframes)
 
@@ -28,6 +29,6 @@ Open http://localhost:3000
 - [x] Hero section
 - [x] Marquee keyword band
 - [x] Curriculum cards (Ingest / Store / Transform / Orchestrate / Serve)
-- [ ] Pricing section
+- [x] Pricing section
 - [ ] Contact form
 - [ ] Footer

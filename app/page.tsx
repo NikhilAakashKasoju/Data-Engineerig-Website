@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import Curriculum from "@/components/Curriculum";
+import Pricing from "@/components/Pricing";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <Marquee />
       <Curriculum />
+      <Pricing />
     </main>
   );
 }
