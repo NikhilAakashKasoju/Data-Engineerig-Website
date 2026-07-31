@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { motion, useReducedMotion, type Variants } from "framer-motion";
+import Logo from "./Logo";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 18 },
@@ -35,16 +36,7 @@ export default function Hero() {
   return (
     <>
       <nav className="sticky top-0 z-50 flex items-center justify-between px-12 py-5 bg-bg/70 backdrop-blur-md">
-        <div className="flex items-center gap-2.5 font-display font-bold text-lg tracking-tight">
-          <div className="w-[30px] h-[30px] rounded-lg bg-gradient-to-br from-purple to-magenta flex items-center justify-center shadow-[0_4px_14px_rgba(139,63,251,0.35)]">
-            <svg viewBox="0 0 24 24" fill="none" className="w-4 h-4">
-              <path d="M4 6c0-1.1 3.6-2 8-2s8 .9 8 2-3.6 2-8 2-8-.9-8-2Z" stroke="#fff" strokeWidth="1.6" />
-              <path d="M4 6v12c0 1.1 3.6 2 8 2s8-.9 8-2V6" stroke="#fff" strokeWidth="1.6" />
-              <path d="M4 12c0 1.1 3.6 2 8 2s8-.9 8-2" stroke="#fff" strokeWidth="1.6" />
-            </svg>
-          </div>
-          DataForge
-        </div>
+        <Logo />
         <ul className="hidden md:flex gap-9 list-none text-[14.5px] text-muted">
           {["Curriculum", "Course", "Instructor", "Contact"].map((item) => (
             <li key={item}>
