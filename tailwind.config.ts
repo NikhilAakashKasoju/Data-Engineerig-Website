@@ -33,11 +33,19 @@ const config: Config = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        // Drives the dash pattern around each field loop. Animating
+        // stroke-dashoffset (rather than redrawing the path) is what makes the
+        // energy appear to travel along the line.
+        fieldFlow: {
+          "0%": { strokeDashoffset: "0" },
+          "100%": { strokeDashoffset: "-240" },
+        },
       },
       animation: {
         fadeUp: "fadeUp 0.8s ease forwards",
         floaty: "floaty 5s ease-in-out infinite",
         marquee: "marquee 42s linear infinite",
+        field: "fieldFlow 7s linear infinite",
       },
     },
   },

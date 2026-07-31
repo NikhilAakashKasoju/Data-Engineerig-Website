@@ -19,10 +19,28 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
+const TITLE = "DataForge — Master End-to-End Azure Data Engineering";
+const DESCRIPTION =
+  "Build production-grade pipelines from ingestion to insight. Learn Azure Data Factory, Databricks, Synapse and Power BI by shipping a real end-to-end project.";
+
 export const metadata: Metadata = {
-  title: "DataForge — Master End-to-End Azure Data Engineering",
-  description:
-    "Build production-grade pipelines from ingestion to insight. Learn Azure Data Factory, Databricks, Synapse and Power BI by shipping a real end-to-end project.",
+  // TODO: set to the real production origin before deploying. Without
+  // metadataBase, Next resolves relative OG image URLs against localhost and
+  // link previews silently break in production.
+  metadataBase: new URL("https://dataforge.example.com"),
+  title: TITLE,
+  description: DESCRIPTION,
+  openGraph: {
+    title: TITLE,
+    description: DESCRIPTION,
+    type: "website",
+    siteName: "DataForge",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -61,6 +61,32 @@
   z-index: 0;
 }
 
+/* The nav is sticky, so an anchor jump would otherwise land the section's top
+   edge underneath it. scroll-margin-top offsets every anchor target by roughly
+   the nav's height. Doing it here rather than per-section means new sections
+   get it for free. */
+section[id] {
+  scroll-margin-top: 92px;
+}
+
+/* Smooth anchor scrolling, but only for users who haven't asked for less
+   motion — a full-page smooth scroll is a common vestibular trigger, and it is
+   not covered by the animation/transition overrides further down. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Links and buttons get an explicit focus ring. The browser default is a thin
+   dark outline that is effectively invisible against #0d0714. Inputs are
+   excluded — they define their own ring in Contact.tsx. */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #b06bff;
+  outline-offset: 3px;
+}
+
 /* Fades the marquee out at both edges instead of hard-cutting at the viewport.
    A mask is used rather than gradient overlays because the page background is a
    fixed vignette — an opaque overlay would have to fake that gradient and would

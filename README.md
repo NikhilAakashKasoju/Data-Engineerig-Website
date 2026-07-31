@@ -17,7 +17,10 @@ Open http://localhost:3000
 - `app/page.tsx` — page composition
 - `components/MotionProvider.tsx` — root MotionConfig so Framer respects prefers-reduced-motion
 - `components/Logo.tsx` — shared wordmark (nav + footer)
-- `components/Hero.tsx` — hero section with the animated pipeline SVG
+- `components/Nav.tsx` — sticky site nav (server component)
+- `lib/motion.ts` — shared Framer variants and viewport config
+- `components/Hero.tsx` — hero copy column + layout
+- `components/HeroViz.tsx` — isometric cuboids, dipole field loops, pointer parallax
 - `components/Marquee.tsx` — infinite keyword band
 - `components/Curriculum.tsx` — five alternating module rows
 - `components/Connector.tsx` — scroll-scrubbed teal arrow drawn between modules
@@ -46,6 +49,6 @@ Open http://localhost:3000
   `PORTRAIT` constant (`Instructor.tsx`).
 - `/api/subscribe` validates but does not send. Wire an email provider and add
   spam protection (honeypot + rate limiting) before going live.
-- Hero SVG uses a fixed 1200×520 viewBox positioned over the headline; it needs
-  a mobile treatment.
+- Hero art now sits in its own grid column (no longer overlaps the headline),
+  but the rest of the page still needs a mobile pass.
 - Social links in `Instructor.tsx` and the "Go to course" CTA point at `#`.

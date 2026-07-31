@@ -1,12 +1,8 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { motion, type Variants } from "framer-motion";
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
+import { motion } from "framer-motion";
+import { fadeUp } from "@/lib/motion";
 
 const fieldClass =
   "w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3.5 text-[15px] text-text placeholder:text-muted/70 outline-none transition-colors focus:border-purple/60 focus:ring-2 focus:ring-purple/25";
