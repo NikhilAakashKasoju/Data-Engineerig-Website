@@ -149,7 +149,7 @@ export default function Contact() {
               disabled={status === "submitting"}
               className="btn-primary mt-7 inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-br from-purple to-[#a24bff] px-7 py-4 text-[15px] font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
             >
-              {status === "submitting" ? "Sending…" : "Get the syllabus"}
+              {status === "submitting" ? "Sending…" : "Submit"}
               <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
                 <path
                   d="M21 3 10.5 13.5M21 3l-6.8 18-3.7-7.5L3 9.8 21 3Z"
@@ -170,7 +170,7 @@ export default function Contact() {
                 status === "error" ? "text-magenta" : "text-teal"
               }`}
             >
-              {status === "success" && "Thanks — the syllabus is on its way."}
+              {status === "success" && "Thanks — the instructor will be in touch with you soon."}
               {status === "error" && error}
             </p>
           </form>
