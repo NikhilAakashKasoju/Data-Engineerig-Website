@@ -23,7 +23,10 @@ Open http://localhost:3000
 - `components/HeroViz.tsx` — isometric cuboids, dipole field loops, pointer parallax
 - `components/Marquee.tsx` — infinite keyword band
 - `components/Curriculum.tsx` — five alternating module rows
+- `components/StageArt.tsx` — SVG illustrations for the five pipeline stages
+- `scripts/extract-instructor-photo.py` — pulls the portrait out of the source PDF
 - `components/Connector.tsx` — scroll-scrubbed teal arrow drawn between modules
+- `components/Phases.tsx` — all 13 curriculum phases
 - `components/Pricing.tsx` — raised offer panel
 - `components/Instructor.tsx` — bio, portrait card and stats
 - `components/Contact.tsx` — syllabus request form
@@ -44,11 +47,17 @@ Open http://localhost:3000
 
 ## Known gaps
 
-- No images yet. Curriculum panels and the instructor portrait render gradient
-  placeholders — see the `image` field in `MODULES` (`Curriculum.tsx`) and the
-  `PORTRAIT` constant (`Instructor.tsx`).
+- `public/instructor.png` is low resolution (~188px wide) for a panel that
+  renders around 450px. Re-extract at source resolution with
+  `python scripts/extract-instructor-photo.py <curriculum.pdf>` if it looks soft.
 - `/api/subscribe` validates but does not send. Wire an email provider and add
   spam protection (honeypot + rate limiting) before going live.
 - Hero art now sits in its own grid column (no longer overlaps the headline),
   but the rest of the page still needs a mobile pass.
-- Social links in `Instructor.tsx` and the "Go to course" CTA point at `#`.
+- Source PDF gives two different durations: "60–70 Total Hours" on the cover vs
+  "180–220 Hours | 4–5 Months (Weekend Batch)" on the curriculum page. The site
+  currently uses 180–220 / 4–5 months. Confirm which is right.
+- No course fee appears anywhere in the PDF, so the pricing panel leads with
+  duration and routes to contact instead of quoting a number.
+- Site is branded "DataForge" while the course is Edufulness / Atchyut Kumar.
+  Deliberate for now — confirm before launch.

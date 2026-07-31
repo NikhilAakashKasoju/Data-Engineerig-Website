@@ -21,7 +21,7 @@ const jetbrains = JetBrains_Mono({
 
 const TITLE = "DataForge — Master End-to-End Azure Data Engineering";
 const DESCRIPTION =
-  "Build production-grade pipelines from ingestion to insight. Learn Azure Data Factory, Databricks, Synapse and Power BI by shipping a real end-to-end project.";
+  "An industry-standard, project-driven curriculum: 33 modules across 13 phases covering SQL, Azure Data Factory, Databricks, PySpark and Delta Lake, ending in a full retail lakehouse build.";
 
 export const metadata: Metadata = {
   // TODO: set to the real production origin before deploying. Without

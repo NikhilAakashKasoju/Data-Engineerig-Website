@@ -1,13 +1,17 @@
+// Synapse and Power BI were dropped: neither appears anywhere in the curriculum.
+// Replaced with technologies the course actually teaches.
 const ITEMS = [
   "Ingest",
   "Store",
   "Transform",
   "Orchestrate",
   "Serve",
-  "Azure",
+  "SQL",
+  "Data Factory",
   "Databricks",
-  "Synapse",
-  "Power BI",
+  "PySpark",
+  "Delta Lake",
+  "Unity Catalog",
 ];
 
 /**

@@ -1,6 +1,18 @@
 import Logo from "./Logo";
 
-const LINKS = ["Curriculum", "Course", "Instructor", "Contact"];
+/**
+ * Explicit label/href pairs rather than deriving the anchor from the label.
+ * "Phases" happens to match its id, but "Program" points at #course — deriving
+ * the href by lowercasing the label only works until the two need to differ,
+ * and then it fails silently with a dead link.
+ */
+const LINKS = [
+  { label: "Curriculum", href: "#curriculum" },
+  { label: "Phases", href: "#phases" },
+  { label: "Program", href: "#course" },
+  { label: "Instructor", href: "#instructor" },
+  { label: "Contact", href: "#contact" },
+];
 
 /**
  * Lifted out of Hero for two reasons: a site-wide <nav> is not part of the hero
@@ -16,14 +28,13 @@ export default function Nav() {
     >
       <Logo />
 
-      <ul className="hidden list-none gap-9 text-[14.5px] text-muted md:flex">
+      {/* lg, not md: five links plus the logo and the CTA measure wider than a
+          768px viewport, so at md they would collide with the button. */}
+      <ul className="hidden list-none gap-8 text-[14.5px] text-muted lg:flex">
         {LINKS.map((item) => (
-          <li key={item}>
-            <a
-              href={`#${item.toLowerCase()}`}
-              className="transition-colors hover:text-text"
-            >
-              {item}
+          <li key={item.href}>
+            <a href={item.href} className="transition-colors hover:text-text">
+              {item.label}
             </a>
           </li>
         ))}

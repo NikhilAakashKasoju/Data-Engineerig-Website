@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import Curriculum from "@/components/Curriculum";
+import Phases from "@/components/Phases";
 import Pricing from "@/components/Pricing";
 import Instructor from "@/components/Instructor";
 import Contact from "@/components/Contact";
@@ -15,6 +16,7 @@ export default function Home() {
         <Hero />
         <Marquee />
         <Curriculum />
+        <Phases />
         <Pricing />
         <Instructor />
         <Contact />

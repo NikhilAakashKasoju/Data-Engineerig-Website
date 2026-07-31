@@ -1,0 +1,5 @@
+# Next.js serves everything in this folder from the site root.
+# public/instructor.jpg  ->  /instructor.jpg
+#
+# Git does not track empty directories, so this file keeps the folder in the
+# repo until real assets land here.

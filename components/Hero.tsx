@@ -4,9 +4,12 @@ import { motion } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
 import HeroViz from "./HeroViz";
 
+// Every figure here is off the curriculum PDF cover page. The previous values
+// (12 weeks, 40+ labs, self-paced) were invented before the document existed —
+// and "self-paced" actively contradicted it, since this runs as a weekend batch.
 const STATS = [
-  ["12", "Weeks / Self-Paced"],
-  ["40+", "Hands-on Labs"],
+  ["33", "Modules"],
+  ["13", "Phases"],
   ["1", "Capstone Project"],
 ] as const;
 
@@ -29,7 +32,7 @@ export default function Hero() {
             variants={fadeUp}
             className="inline-flex items-center gap-2 rounded-full border border-white/[0.09] bg-teal/[0.04] px-4 py-2 font-mono text-xs tracking-[0.12em] text-teal"
           >
-            ✦ THE 2026 DATA ENGINEERING BOOTCAMP
+            ✦ INDUSTRY-STANDARD · 100% PROJECT-DRIVEN
           </motion.div>
 
           <motion.h1
@@ -52,11 +55,9 @@ export default function Hero() {
             className="mt-7 max-w-[520px] text-[16.5px] leading-relaxed text-muted"
           >
             Build production-grade pipelines from ingestion to insight. Learn{" "}
-            <b className="font-semibold text-[#c9c9d1]">
-              Azure Data Factory, Databricks, Synapse
-            </b>{" "}
-            and <b className="font-semibold text-[#c9c9d1]">Power BI</b> by shipping a real
-            end-to-end project — guided by John Doe.
+            <b className="font-semibold text-[#c9c9d1]">SQL, Azure Data Factory, Databricks</b> and{" "}
+            <b className="font-semibold text-[#c9c9d1]">PySpark</b> by shipping a real retail
+            lakehouse — guided by Atchyut Kumar.
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-4">

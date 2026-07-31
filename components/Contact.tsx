@@ -68,15 +68,15 @@ export default function Contact() {
           </h2>
 
           <p className="mt-5 max-w-[440px] text-[15.5px] leading-relaxed text-muted">
-            Drop your details to get the syllabus and cohort updates — or jump straight into
-            enrollment.
+            Drop your details to get the full 33-module syllabus and upcoming batch dates — or
+            reach Atchyut directly on WhatsApp.
           </p>
 
           <a
-            href="#course"
+            href="https://wa.me/919567034641"
             className="btn-primary mt-8 inline-flex items-center justify-center rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
           >
-            Enroll now
+            Message on WhatsApp
           </a>
         </motion.div>
 

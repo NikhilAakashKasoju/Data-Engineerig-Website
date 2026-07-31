@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Connector from "./Connector";
+import StageArt, { type StageName } from "./StageArt";
 import { fadeUp } from "@/lib/motion";
 
 /* ---------------------------------------------------------------- icons -- */
@@ -68,35 +69,36 @@ const Check = () => (
 type ModuleItem = {
   n: string;
   icon: keyof typeof ICONS;
+  art: StageName;
   eyebrow: string;
   title: string;
   body: string;
   points: string[];
-  /** Drop a real image path here (e.g. "/curriculum/ingest.jpg") to replace the
-   *  gradient placeholder. */
-  image?: string;
 };
 
 const MODULES: ModuleItem[] = [
   {
     n: "01",
     icon: "ingest",
-    eyebrow: "Data Factory · Event Hubs",
+    art: "ingest",
+    eyebrow: "Data Factory · Auto Loader",
     title: "Ingest",
-    body: "Pull data from APIs, databases and streams. Build resilient, incremental ingestion pipelines that never lose an event.",
-    points: ["Batch & streaming sources", "Change data capture", "Fault-tolerant loads"],
+    body: "Pull data from databases, files and streams. Build a metadata-driven framework that handles full and incremental loads from one pipeline.",
+    points: ["Batch & streaming sources", "Watermarking & CDC", "Metadata-driven framework"],
   },
   {
     n: "02",
     icon: "store",
+    art: "store",
     eyebrow: "ADLS Gen2 · Lakehouse",
     title: "Store",
-    body: "Design a medallion lakehouse. Model bronze, silver and gold layers with partitioning that scales to billions of rows.",
-    points: ["Delta Lake tables", "Bronze/Silver/Gold", "Cost-smart partitioning"],
+    body: "Design a medallion lakehouse on ADLS Gen2. Model bronze, silver and gold layers on Delta, with ACID guarantees and a real transaction log.",
+    points: ["Delta Lake & the _delta_log", "Bronze/Silver/Gold", "Z-ordering & liquid clustering"],
   },
   {
     n: "03",
     icon: "transform",
+    art: "transform",
     eyebrow: "Databricks · PySpark",
     title: "Transform",
     body: "Clean, join and reshape at scale. Handle schema drift, deduplication and business logic with tested Spark jobs.",
@@ -105,18 +107,20 @@ const MODULES: ModuleItem[] = [
   {
     n: "04",
     icon: "orchestrate",
-    eyebrow: "Airflow · ADF Pipelines",
+    art: "orchestrate",
+    eyebrow: "ADF Pipelines · Databricks Workflows",
     title: "Orchestrate",
-    body: "Schedule, monitor and retry. Wire everything into dependable DAGs with alerting, backfills and data quality gates.",
-    points: ["DAG design", "Retries & SLAs", "Data quality checks"],
+    body: "Schedule, monitor and retry. Wire the stages into multi-task workflows with dependencies, automated retries and an enterprise audit log.",
+    points: ["Task dependencies", "Retries & scheduling", "Logging & audit framework"],
   },
   {
     n: "05",
     icon: "serve",
-    eyebrow: "Synapse · Power BI",
+    art: "serve",
+    eyebrow: "Unity Catalog · Gold Layer",
     title: "Serve",
-    body: "Turn curated data into decisions. Publish semantic models and interactive dashboards stakeholders actually use.",
-    points: ["Semantic models", "Power BI dashboards", "Self-serve analytics"],
+    body: "Turn curated data into decisions. Publish business-ready gold marts governed by Unity Catalog, with lineage and fine-grained access control.",
+    points: ["Business-ready gold marts", "Unity Catalog lineage", "Row & column-level security"],
   },
 ];
 
@@ -124,15 +128,8 @@ const MODULES: ModuleItem[] = [
 
 function Panel({ item }: { item: ModuleItem }) {
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/[0.07] bg-gradient-to-br from-purple/25 via-[#1a1030] to-teal/10">
-      {item.image && (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={item.image}
-          alt={`${item.title} — ${item.eyebrow}`}
-          className="h-full w-full object-cover"
-        />
-      )}
+    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/[0.07] bg-gradient-to-br from-purple/[0.14] via-[#150e26] to-teal/[0.06]">
+      <StageArt name={item.art} />
       <span className="absolute bottom-4 left-4 rounded-md bg-black/55 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-text backdrop-blur-sm">
         {item.title}
       </span>
@@ -186,8 +183,8 @@ export default function Curriculum() {
           Follow the data — from raw source to real decisions.
         </h2>
         <p className="mt-5 max-w-[560px] text-[15.5px] leading-relaxed text-muted">
-          Every module maps to one stage of a production pipeline. You&apos;ll build each stage
-          yourself, then connect them into a single end-to-end system.
+          The 13 phases map onto five stages of a production pipeline. You&apos;ll build each
+          stage yourself, then connect them into a single retail lakehouse.
         </p>
       </motion.div>
 

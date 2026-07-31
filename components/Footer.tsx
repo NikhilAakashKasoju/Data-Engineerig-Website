@@ -5,6 +5,7 @@ const COLUMNS = [
     heading: "Course",
     links: [
       { label: "Curriculum", href: "#curriculum" },
+      { label: "All 13 phases", href: "#phases" },
       { label: "Enroll", href: "#course" },
       { label: "Instructor", href: "#instructor" },
     ],
@@ -12,8 +13,9 @@ const COLUMNS = [
   {
     heading: "Contact",
     links: [
-      { label: "John Doe", href: "#instructor" },
-      { label: "john.doe@example.com", href: "mailto:john.doe@example.com" },
+      { label: "Atchyut Kumar", href: "#instructor" },
+      { label: "edufulness.com", href: "https://www.edufulness.com" },
+      { label: "WhatsApp: 9567034641", href: "https://wa.me/919567034641" },
     ],
   },
 ];
@@ -57,7 +59,7 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col gap-3 border-t border-white/[0.07] pt-7 font-mono text-[11px] uppercase tracking-[0.08em] text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} DataForge. All rights reserved.</p>
-          <p>Built for aspiring data engineers.</p>
+          <p>Think. Learn. Evolve.</p>
         </div>
       </div>
     </footer>

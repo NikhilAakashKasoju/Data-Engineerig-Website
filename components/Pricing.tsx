@@ -15,7 +15,7 @@ const iconProps = {
 
 const FEATURES = [
   {
-    label: "12 weeks · lifetime access",
+    label: "180–220 hours · 4–5 months",
     icon: (
       <svg {...iconProps}>
         <circle cx="12" cy="12" r="8.5" />
@@ -24,7 +24,7 @@ const FEATURES = [
     ),
   },
   {
-    label: "40+ labs & real datasets",
+    label: "33 modules across 13 phases",
     icon: (
       <svg {...iconProps}>
         <path d="m12 3 8.5 4.5L12 12 3.5 7.5 12 3Z" />
@@ -33,7 +33,7 @@ const FEATURES = [
     ),
   },
   {
-    label: "Verified capstone certificate",
+    label: "Databricks certification prep",
     icon: (
       <svg {...iconProps}>
         <path d="M7.5 4h9v5a4.5 4.5 0 0 1-9 0V4Z" />
@@ -83,16 +83,16 @@ export default function Pricing() {
           <div className="md:pr-12">
             <span className="inline-flex items-center gap-2.5 rounded-full border border-purple/40 bg-purple/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.11em] text-purple-2">
               <span className="h-1.5 w-1.5 rounded-full bg-lime" />
-              Enrolling now · Cohort 2026
+              Weekend batch · 100% project-driven
             </span>
 
-            <h3 className="mt-6 max-w-[520px] font-display text-[clamp(24px,2.6vw,32px)] font-bold leading-[1.18] tracking-tight">
-              Azure Data Engineering — Zero to Production
+            <h3 className="mt-6 max-w-[540px] font-display text-[clamp(24px,2.6vw,32px)] font-bold leading-[1.18] tracking-tight">
+              Azure Data Engineering with SQL, Data Factory, Databricks &amp; PySpark
             </h3>
 
             <p className="mt-4 max-w-[480px] text-[15.5px] leading-relaxed text-muted">
-              From raw ingestion to executive dashboards. Design lakehouses, orchestrate
-              pipelines, and deploy a portfolio-ready project.
+              An industry-standard curriculum for professionals with 5+ years of experience. From
+              raw ingestion to a governed gold layer, ending in a full retail lakehouse build.
             </p>
 
             <ul className="mt-8 list-none space-y-4">
@@ -113,25 +113,31 @@ export default function Pricing() {
               the card's padding — and it disappears automatically when the grid
               collapses to one column. */}
           <div className="flex flex-col justify-center border-t border-white/[0.08] pt-10 md:border-l md:border-t-0 md:pl-12 md:pt-0">
+            {/* The $499/$899 price that was here was invented — the curriculum
+                PDF quotes no fee at all. Rather than publish a made-up number on
+                a real course page, this now leads with the verifiable commitment
+                and routes the fee question to a human. */}
             <p className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
-              Full program
+              Full programme
             </p>
 
-            <p className="mt-3 flex items-baseline gap-3">
-              <b className="font-display text-[clamp(44px,5vw,60px)] font-bold leading-none tracking-tight">
-                $499
+            <p className="mt-3">
+              <b className="font-display text-[clamp(38px,4.4vw,52px)] font-bold leading-none tracking-tight">
+                180–220
               </b>
-              <s className="text-[19px] text-muted decoration-muted/70">$899</s>
+              <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.09em] text-muted">
+                Hours · 4–5 months · weekend batch
+              </span>
             </p>
 
             <a
               href="#contact"
               className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
-              Go to course
+              Request the syllabus
               <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
                 <path
-                  d="M7 17 17 7M9 7h8v8"
+                  d="M5 12h14M13 6l6 6-6 6"
                   stroke="#fff"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -140,9 +146,12 @@ export default function Pricing() {
               </svg>
             </a>
 
-            <p className="mt-4 text-center font-mono text-[10.5px] uppercase tracking-[0.09em] text-muted">
-              Redirects to the enrollment page
-            </p>
+            <a
+              href="https://wa.me/919567034641"
+              className="mt-3 block text-center font-mono text-[10.5px] uppercase tracking-[0.09em] text-muted transition-colors hover:text-text"
+            >
+              Or call / WhatsApp 9567034641
+            </a>
           </div>
         </div>
       </motion.div>

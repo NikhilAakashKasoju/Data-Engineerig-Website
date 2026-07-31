@@ -1,32 +1,41 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 
-/** Drop a real portrait in /public and set this to e.g. "/instructor.jpg". */
-const PORTRAIT: string | undefined = undefined;
+/** Served from public/instructor.png — paths in /public resolve from the site root. */
+const PORTRAIT = "/instructor.png";
 
 const STATS = [
-  ["9+", "Years in data"],
-  ["12k", "Students taught"],
-  ["4.9", "Avg. rating"],
+  ["15+", "Years experience"],
+  ["50k+", "Students mentored"],
+  ["99.97", "GATE percentile"],
 ] as const;
 
+const EXPERTISE = [
+  ["Data Engineering", "9+ years of hands-on data integration, transformation and schema design."],
+  ["GATE CS/IT Faculty", "7+ years teaching GATE aspirants, with a track record of top ranks."],
+  ["Algorithms", "Competitive programming, optimisation and problem-solving technique."],
+] as const;
+
+// LinkedIn / Twitter / GitHub were placeholders pointing at "#". Replaced with
+// the three channels the curriculum PDF actually lists.
 const SOCIALS = [
   {
-    label: "LinkedIn",
-    href: "#",
-    path: "M4.98 3.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4ZM3.2 9h3.6v11.5H3.2V9Zm6 0h3.45v1.6h.05a3.8 3.8 0 0 1 3.4-1.85c3.63 0 4.3 2.35 4.3 5.4v6.35h-3.6v-5.63c0-1.34-.02-3.07-1.9-3.07-1.9 0-2.2 1.47-2.2 2.98v5.72H9.2V9Z",
+    label: "YouTube — EduFulness",
+    href: "https://youtube.com/@EduFulnessEFN",
+    path: "M21.6 7.2a2.5 2.5 0 0 0-1.75-1.77C18.3 5 12 5 12 5s-6.3 0-7.85.43A2.5 2.5 0 0 0 2.4 7.2 26 26 0 0 0 2 12a26 26 0 0 0 .4 4.8 2.5 2.5 0 0 0 1.75 1.77C5.7 19 12 19 12 19s6.3 0 7.85-.43a2.5 2.5 0 0 0 1.75-1.77A26 26 0 0 0 22 12a26 26 0 0 0-.4-4.8ZM10 15.1V8.9l5.2 3.1-5.2 3.1Z",
   },
   {
-    label: "Twitter",
-    href: "#",
-    path: "M21 5.9c-.7.3-1.4.5-2.2.6.8-.5 1.4-1.2 1.7-2.1-.75.44-1.57.76-2.44.93a3.84 3.84 0 0 0-6.6 3.5A10.9 10.9 0 0 1 3.5 4.8a3.84 3.84 0 0 0 1.2 5.13c-.63-.02-1.22-.2-1.74-.48v.05a3.84 3.84 0 0 0 3.08 3.77c-.57.15-1.17.18-1.74.07a3.85 3.85 0 0 0 3.59 2.67A7.72 7.72 0 0 1 2.5 17.6a10.87 10.87 0 0 0 5.89 1.73c7.07 0 10.94-5.86 10.94-10.94l-.01-.5c.75-.54 1.4-1.22 1.92-2Z",
+    label: "edufulness.com",
+    href: "https://www.edufulness.com",
+    path: "M12 2.5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19Zm6.9 8.6h-3.05a14.7 14.7 0 0 0-1.36-5.52 7.53 7.53 0 0 1 4.41 5.52ZM12 4.6c.83 1.2 1.6 3.4 1.75 6.5h-3.5C10.4 8 11.17 5.8 12 4.6ZM4.6 12.9h3.05a14.7 14.7 0 0 0 1.36 5.52A7.53 7.53 0 0 1 4.6 12.9Zm3.05-1.8H4.6a7.53 7.53 0 0 1 4.41-5.52A14.7 14.7 0 0 0 7.65 11.1ZM12 19.4c-.83-1.2-1.6-3.4-1.75-6.5h3.5c-.15 3.1-.92 5.3-1.75 6.5Zm2.49-.98a14.7 14.7 0 0 0 1.36-5.52h3.05a7.53 7.53 0 0 1-4.41 5.52Z",
   },
   {
-    label: "GitHub",
-    href: "#",
-    path: "M12 2.5a9.5 9.5 0 0 0-3 18.52c.47.09.65-.21.65-.46l-.01-1.61c-2.64.58-3.2-1.27-3.2-1.27-.43-1.1-1.05-1.39-1.05-1.39-.86-.59.07-.58.07-.58.95.07 1.45.98 1.45.98.85 1.45 2.22 1.03 2.76.79.09-.61.33-1.03.6-1.27-2.11-.24-4.33-1.06-4.33-4.7 0-1.04.37-1.89.98-2.55-.1-.24-.43-1.2.09-2.51 0 0 .8-.26 2.62.98a9.1 9.1 0 0 1 4.77 0c1.82-1.24 2.62-.98 2.62-.98.52 1.31.19 2.27.1 2.51.61.66.98 1.51.98 2.55 0 3.65-2.23 4.45-4.35 4.69.34.3.65.87.65 1.76l-.01 2.61c0 .25.17.55.66.46A9.5 9.5 0 0 0 12 2.5Z",
+    label: "WhatsApp 9567034641",
+    href: "https://wa.me/919567034641",
+    path: "M12 2.7a9.2 9.2 0 0 0-7.9 13.9L2.7 21.3l4.9-1.3A9.2 9.2 0 1 0 12 2.7Zm0 16.7a7.5 7.5 0 0 1-3.8-1l-.27-.16-2.9.76.77-2.83-.18-.29A7.5 7.5 0 1 1 12 19.4Zm4.2-5.5c-.23-.12-1.36-.67-1.57-.74s-.36-.12-.52.11-.6.74-.73.9-.27.17-.5.06a6.1 6.1 0 0 1-1.8-1.11 6.8 6.8 0 0 1-1.25-1.56c-.13-.23 0-.35.1-.46l.35-.4a1.6 1.6 0 0 0 .23-.39.42.42 0 0 0 0-.4c0-.11-.52-1.25-.71-1.71s-.38-.39-.52-.4h-.44a.85.85 0 0 0-.62.29 2.59 2.59 0 0 0-.8 1.92 4.48 4.48 0 0 0 .94 2.39 10.3 10.3 0 0 0 3.95 3.48 4.53 4.53 0 0 0 2.78.58 2.36 2.36 0 0 0 1.55-1.1 1.92 1.92 0 0 0 .13-1.09c-.05-.1-.2-.16-.43-.27Z",
   },
 ];
 
@@ -47,22 +56,34 @@ export default function Instructor() {
             className="absolute -inset-6 rounded-[2rem] bg-purple/15 blur-[70px]"
           />
           <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-br from-purple/25 via-[#1a1030] to-teal/10">
-            {PORTRAIT && (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={PORTRAIT}
-                alt="John Doe, lead data engineer and instructor"
-                className="h-full w-full object-cover"
-              />
-            )}
+            {/* `fill` + `sizes` lets Next pick a sensible source width per
+                breakpoint and serve WebP/AVIF. The parent is already
+                `relative`, which fill requires. */}
+            <Image
+              src={PORTRAIT}
+              alt="Atchyut Kumar, lead instructor"
+              fill
+              priority
+              sizes="(min-width: 768px) 40vw, 100vw"
+              className="object-cover object-top"
+            />
+
+            {/* The source photo has a dark green studio backdrop that fights the
+                violet page. A low-opacity violet wash pulls it toward the
+                palette without visibly recolouring skin tones. Delete this div
+                to see the untinted original. */}
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-purple/20 mix-blend-soft-light"
+            />
 
             {/* The caption sits on a gradient scrim rather than directly on the
                 photo — a portrait's lower third is unpredictable, and white text
                 on an unknown background is the classic contrast failure. */}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent p-6 pt-16">
-              <p className="font-display text-[23px] font-bold tracking-tight">John Doe</p>
+              <p className="font-display text-[23px] font-bold tracking-tight">Atchyut Kumar</p>
               <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.11em] text-teal">
-                Lead Data Engineer &amp; Instructor
+                Lead Instructor · M.Tech, NIT Calicut
               </p>
             </div>
           </div>
@@ -80,14 +101,29 @@ export default function Instructor() {
           </p>
 
           <h2 className="mt-4 max-w-[560px] font-display text-[clamp(28px,3.5vw,43px)] font-bold leading-[1.13] tracking-tight">
-            Learn from someone who ships pipelines for a living.
+            Learn from someone who has mentored 50,000 students.
           </h2>
 
           <p className="mt-5 max-w-[560px] text-[15.5px] leading-relaxed text-muted">
-            John Doe has spent nearly a decade designing petabyte-scale data platforms on Azure
-            for fintech and retail. This course distills those hard-won patterns into a clear,
-            buildable path — no fluff, just the workflow real teams use.
+            Atchyut Kumar holds an M.Tech from NIT Calicut and placed in the 99.97 percentile of
+            GATE CS/IT (AIR 440). Across 15+ years in teaching, research and industry he has
+            mentored students into roles at Amazon, Google, Oracle, Samsung and Adobe — and brings
+            9+ years of hands-on data engineering to every module.
           </p>
+
+          <ul className="mt-8 list-none space-y-4">
+            {EXPERTISE.map(([title, detail]) => (
+              <li key={title} className="flex gap-3.5">
+                <span
+                  aria-hidden
+                  className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-purple-2"
+                />
+                <p className="text-[14.5px] leading-relaxed text-muted">
+                  <b className="font-semibold text-text">{title}</b> — {detail}
+                </p>
+              </li>
+            ))}
+          </ul>
 
           <dl className="mt-10 flex flex-wrap gap-x-14 gap-y-6">
             {STATS.map(([value, label]) => (
