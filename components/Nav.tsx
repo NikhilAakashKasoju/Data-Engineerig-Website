@@ -28,24 +28,29 @@ export default function Nav() {
     >
       <Logo />
 
-      {/* lg, not md: five links plus the logo and the CTA measure wider than a
-          768px viewport, so at md they would collide with the button. */}
-      <ul className="hidden list-none gap-8 text-[14.5px] text-muted lg:flex">
-        {LINKS.map((item) => (
-          <li key={item.href}>
-            <a href={item.href} className="transition-colors hover:text-text">
-              {item.label}
-            </a>
-          </li>
-        ))}
-      </ul>
+      {/* Links and CTA share one right-hand group, so `justify-between` on the
+          nav pushes the whole cluster against the right edge with the logo
+          alone on the left — rather than the links floating in the centre. */}
+      <div className="flex items-center gap-10">
+        {/* lg, not md: five links plus the logo and the CTA measure wider than a
+            768px viewport, so at md they would collide with the button. */}
+        <ul className="hidden list-none gap-8 text-[14.5px] text-muted lg:flex">
+          {LINKS.map((item) => (
+            <li key={item.href}>
+              <a href={item.href} className="transition-colors hover:text-text">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
 
-      <a
-        href="#course"
-        className="rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(139,63,251,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_22px_rgba(139,63,251,0.5)]"
-      >
-        Enroll Now
-      </a>
+        <a
+          href="#course"
+          className="shrink-0 rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(139,63,251,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_22px_rgba(139,63,251,0.5)]"
+        >
+          Enroll Now
+        </a>
+      </div>
     </nav>
   );
 }

@@ -45,6 +45,22 @@ Open http://localhost:3000
 - [x] Contact form
 - [x] Footer
 
+## Contact form email
+
+`POST /api/subscribe` delivers enquiries via Resend. To enable it:
+
+1. Create a free key at https://resend.com (100 emails/day, no card).
+2. `cp .env.example .env.local` and paste the key into `RESEND_API_KEY`.
+3. Restart `npm run dev`.
+
+Without a key the route logs the submission and returns success in development,
+and returns HTTP 503 in production — deliberately loud, so a misconfigured
+deploy can't quietly swallow leads.
+
+The default sender `onboarding@resend.dev` needs no DNS setup but only delivers
+to the address that owns the Resend account. Verify a domain and set
+`CONTACT_FROM` to send anywhere.
+
 ## Known gaps
 
 - `public/instructor.png` is low resolution (~188px wide) for a panel that

@@ -16,6 +16,7 @@ const STATS = [
 export default function Hero() {
   return (
     <motion.section
+      id="hero"
       className="relative z-10 mx-auto max-w-[1300px] px-12 pb-16 pt-20"
       variants={stagger}
       initial="hidden"
