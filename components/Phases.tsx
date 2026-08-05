@@ -130,7 +130,7 @@ export default function Phases() {
           <motion.li
             key={p.n}
             variants={fadeUp}
-            className="group rounded-2xl border border-white/[0.07] bg-white/[0.02] p-6 transition-colors hover:border-purple/35 hover:bg-white/[0.04]"
+            className="group rounded-2xl border border-line bg-surface p-6 transition-colors hover:border-purple/35 hover:bg-surface-2"
           >
             <div className="flex items-baseline justify-between gap-3">
               <span className="font-mono text-[12px] tracking-[0.1em] text-purple-2">

@@ -36,11 +36,17 @@ function isoFaces(cx: number, cy: number, w: number, h: number) {
 
 /* -------------------------------------------------------------- geometry -- */
 
+/**
+ * Colours reference CSS variables so the artwork follows the theme — the teal
+ * in particular is far too pale to read on a light background and is darkened
+ * by the light palette. These go through `style`, not fill/stroke attributes:
+ * var() is valid in a CSS property but not in an SVG presentation attribute.
+ */
 const CUBES = [
-  { cx: 150, cy: 178, w: 46, h: 58, color: "#5eead4", tilt: -6, delay: 0 },
-  { cx: 300, cy: 288, w: 53, h: 68, color: "#2bb8f5", tilt: 5, delay: 0.7 },
-  { cx: 142, cy: 402, w: 44, h: 56, color: "#4b85ff", tilt: -4, delay: 1.4 },
-  { cx: 302, cy: 512, w: 50, h: 63, color: "#0b4fdb", tilt: 7, delay: 2.1 },
+  { cx: 150, cy: 178, w: 46, h: 58, color: "var(--hex-teal)", tilt: -6, delay: 0 },
+  { cx: 300, cy: 288, w: 53, h: 68, color: "var(--hex-accent)", tilt: 5, delay: 0.7 },
+  { cx: 142, cy: 402, w: 44, h: 56, color: "var(--hex-primary-2)", tilt: -4, delay: 1.4 },
+  { cx: 302, cy: 512, w: 50, h: 63, color: "var(--hex-primary)", tilt: 7, delay: 2.1 },
 ];
 
 /** Threads through the cube centres so the assembly still reads as a pipeline. */
@@ -82,12 +88,11 @@ function Field({
           rx={l.rx}
           ry={l.ry}
           fill="none"
-          stroke={color}
           strokeWidth="1.1"
           strokeOpacity={l.opacity}
           strokeDasharray="7 11"
           className="animate-field"
-          style={{ animationDelay: `${delay + i * 0.5}s` }}
+          style={{ stroke: color, animationDelay: `${delay + i * 0.5}s` }}
         />
       ))}
     </g>
@@ -162,8 +167,8 @@ export default function HeroViz() {
         >
           <defs>
             <linearGradient id="vizPipe" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#0b4fdb" />
-              <stop offset="100%" stopColor="#2bb8f5" />
+              <stop offset="0%" style={{ stopColor: "var(--hex-primary)" }} />
+              <stop offset="100%" style={{ stopColor: "var(--hex-accent)" }} />
             </linearGradient>
           </defs>
 
@@ -192,7 +197,11 @@ export default function HeroViz() {
           />
 
           {[0, -2.4].map((begin, i) => (
-            <circle key={i} r={i === 0 ? 5 : 3.5} fill={i === 0 ? "#d4ff5c" : "#5eead4"}>
+            <circle
+              key={i}
+              r={i === 0 ? 5 : 3.5}
+              style={{ fill: i === 0 ? "var(--hex-lime)" : "var(--hex-teal)" }}
+            >
               <animateMotion dur="5s" begin={`${begin}s`} repeatCount="indefinite" path={PIPE} />
             </circle>
           ))}
@@ -206,15 +215,17 @@ export default function HeroViz() {
               // shape onto the origin.
               <g key={i} transform={`rotate(${c.tilt} ${f.center[0]} ${f.center[1]})`}>
                 <g className="animate-floaty" style={{ animationDelay: `${c.delay}s` }}>
-                  <polygon points={f.left} fill={c.color} fillOpacity="0.42" />
-                  <polygon points={f.right} fill={c.color} fillOpacity="0.68" />
-                  <polygon points={f.top} fill={c.color} fillOpacity="0.95" />
+                  <polygon points={f.left} style={{ fill: c.color }} fillOpacity="0.42" />
+                  <polygon points={f.right} style={{ fill: c.color }} fillOpacity="0.68" />
+                  <polygon points={f.top} style={{ fill: c.color }} fillOpacity="0.95" />
                   {/* Hairline on the silhouette only — inner seams read as
-                      cracks rather than edges at this scale. */}
+                      cracks rather than edges at this scale. currentColor picks
+                      up the themed text colour, so it's a light edge on dark
+                      and a dark edge on light. */}
                   <polygon
                     points={f.top}
                     fill="none"
-                    stroke="#ffffff"
+                    stroke="currentColor"
                     strokeOpacity="0.28"
                     strokeWidth="1"
                   />

@@ -52,11 +52,18 @@ const ICONS = {
 };
 
 const Check = () => (
-  <svg viewBox="0 0 24 24" fill="none" className="mt-[3px] h-[17px] w-[17px] shrink-0">
-    <circle cx="12" cy="12" r="9.2" stroke="#d4ff5c" strokeWidth="1.5" />
+  // currentColor + a Tailwind text class, so the tick follows the theme —
+  // #d4ff5c is unreadable on a light background.
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    className="mt-[3px] h-[17px] w-[17px] shrink-0 text-lime"
+    aria-hidden
+  >
+    <circle cx="12" cy="12" r="9.2" stroke="currentColor" strokeWidth="1.5" />
     <path
       d="m8.4 12.2 2.5 2.5 4.7-4.9"
-      stroke="#d4ff5c"
+      stroke="currentColor"
       strokeWidth="1.7"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -128,9 +135,13 @@ const MODULES: ModuleItem[] = [
 
 function Panel({ item }: { item: ModuleItem }) {
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/[0.07] bg-gradient-to-br from-purple/[0.14] via-[#0c1428] to-teal/[0.06]">
+    // Fixed dark canvas in BOTH themes. The illustrations use mid-tone blues,
+    // teal and lime that would wash out on a light field — treating these as
+    // dark media tiles (like an embedded diagram) is cheaper and reads as
+    // deliberate rather than re-colouring five drawings per theme.
+    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-[#12203f] via-[#0c1428] to-[#0d2a2a]">
       <StageArt name={item.art} />
-      <span className="absolute bottom-4 left-4 rounded-md bg-black/55 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-text backdrop-blur-sm">
+      <span className="absolute bottom-4 left-4 rounded-md bg-black/60 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-text backdrop-blur-sm">
         {item.title}
       </span>
     </div>
@@ -141,7 +152,7 @@ function Copy({ item }: { item: ModuleItem }) {
   return (
     <div>
       <div className="flex items-center gap-4">
-        <b className="font-display text-[40px] font-bold leading-none text-white/15">{item.n}</b>
+        <b className="font-display text-[40px] font-bold leading-none text-faint">{item.n}</b>
         <span className="flex h-11 w-11 items-center justify-center rounded-xl border border-purple/30 bg-purple/15 text-purple-2">
           {ICONS[item.icon]}
         </span>

@@ -44,22 +44,29 @@ export default function Connector({ direction }: { direction: "left" | "right" }
         className="mx-auto h-full w-[280px] overflow-visible sm:w-[360px]"
         style={{ transform: direction === "right" ? "scaleX(-1)" : undefined }}
       >
+        {/* Stroke comes from a CSS variable so it follows the theme. It has to
+            go through `style` rather than the stroke attribute — var() is not
+            valid in an SVG presentation attribute, only in a CSS property. */}
         <motion.path
           d="M160 10 C150 58, 122 80, 60 100"
           fill="none"
-          stroke="#5eead4"
           strokeWidth="2.2"
           strokeLinecap="round"
-          style={drawn ? undefined : { pathLength: scrollYProgress }}
+          style={{
+            stroke: "var(--hex-teal)",
+            ...(drawn ? {} : { pathLength: scrollYProgress }),
+          }}
         />
         <motion.path
           d="M81.7 103.7 L60 100 L75.2 84.1"
           fill="none"
-          stroke="#5eead4"
           strokeWidth="2.2"
           strokeLinecap="round"
           strokeLinejoin="round"
-          style={drawn ? undefined : { opacity: headOpacity }}
+          style={{
+            stroke: "var(--hex-teal)",
+            ...(drawn ? {} : { opacity: headOpacity }),
+          }}
         />
       </svg>
     </div>

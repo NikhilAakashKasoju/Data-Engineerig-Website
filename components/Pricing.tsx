@@ -79,7 +79,7 @@ export default function Pricing() {
           className="absolute -top-10 left-1/2 h-40 w-[70%] -translate-x-1/2 rounded-full bg-purple/20 blur-[80px]"
         />
 
-        <div className="relative grid grid-cols-1 gap-10 rounded-3xl border border-white/[0.08] bg-white/[0.02] p-10 backdrop-blur-sm md:grid-cols-[1.5fr_1fr] md:gap-0 md:p-12">
+        <div className="relative grid grid-cols-1 gap-10 rounded-3xl border border-line bg-surface p-10 backdrop-blur-sm md:grid-cols-[1.5fr_1fr] md:gap-0 md:p-12">
           {/* ------------------------------------------------- left column -- */}
           <div className="md:pr-12">
             <span className="inline-flex items-center gap-2.5 rounded-full border border-purple/40 bg-purple/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.11em] text-purple-2">
@@ -99,7 +99,7 @@ export default function Pricing() {
             <ul className="mt-8 list-none space-y-4">
               {FEATURES.map((f) => (
                 <li key={f.label} className="flex items-center gap-3.5 text-[15px]">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/[0.07] bg-white/[0.03] text-teal">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-line bg-surface-2 text-teal">
                     {f.icon}
                   </span>
                   {f.label}
@@ -113,7 +113,7 @@ export default function Pricing() {
               absolutely positioned element, so it can't drift out of sync with
               the card's padding — and it disappears automatically when the grid
               collapses to one column. */}
-          <div className="flex flex-col justify-center border-t border-white/[0.08] pt-10 md:border-l md:border-t-0 md:pl-12 md:pt-0">
+          <div className="flex flex-col justify-center border-t border-line pt-10 md:border-l md:border-t-0 md:pl-12 md:pt-0">
             {/* The $499/$899 price that was here was invented — the curriculum
                 PDF quotes no fee at all. Rather than publish a made-up number on
                 a real course page, this now leads with the verifiable commitment

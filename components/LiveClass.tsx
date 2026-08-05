@@ -120,7 +120,7 @@ export default function LiveClass() {
             resorting to a second primary button colour. */}
         <div className="relative grid grid-cols-1 gap-10 rounded-3xl border border-teal/20 bg-teal/[0.03] p-8 backdrop-blur-sm md:grid-cols-[auto_1fr_auto] md:items-center md:gap-12 md:p-10">
           {/* ------------------------------------------------ calendar tile -- */}
-          <div className="flex w-[104px] shrink-0 flex-col overflow-hidden rounded-2xl border border-white/[0.09] bg-white/[0.03] text-center">
+          <div className="flex w-[104px] shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-surface-2 text-center">
             <span className="bg-teal/15 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-teal">
               {UPCOMING.month}
             </span>

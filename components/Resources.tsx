@@ -86,13 +86,13 @@ function Card({ item }: { item: Resource }) {
       rel="noopener noreferrer"
       // The whole card is the link, so the click target is the full tile rather
       // than a small "watch" affordance in the corner.
-      className="group flex h-full flex-col rounded-2xl border border-white/[0.07] bg-white/[0.02] p-4 transition-colors hover:border-white/[0.18] hover:bg-white/[0.05]"
+      className="group flex h-full flex-col rounded-2xl border border-line bg-surface p-4 transition-colors hover:border-line-strong hover:bg-surface-2"
     >
       {/* Accent colours vary per card, so the tints are inline styles — Tailwind
           compiles a static stylesheet and cannot generate classes from runtime
           values. */}
       <div
-        className="relative aspect-video overflow-hidden rounded-xl border border-white/[0.06]"
+        className="relative aspect-video overflow-hidden rounded-xl border border-line"
         style={{ background: `linear-gradient(140deg, ${item.accent}33, #0c1428 65%)` }}
       >
         <div
@@ -118,7 +118,7 @@ function Card({ item }: { item: Resource }) {
           </span>
         </span>
 
-        <span className="absolute right-3 top-3 rounded-md bg-black/60 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-text backdrop-blur-sm">
+        <span className="absolute right-3 top-3 rounded-md bg-black/60 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.08em] text-white backdrop-blur-sm">
           {item.count}
         </span>
       </div>

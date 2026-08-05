@@ -2,6 +2,119 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ---------------------------------------------------------------- themes -- */
+
+/*
+ * Dark is the default. Channel triplets (not hex) so Tailwind's `/opacity`
+ * modifiers keep working — see the comment in tailwind.config.ts.
+ *
+ * The --hex-* duplicates exist for inline SVG. `fill="var(--x)"` does not work
+ * as a presentation attribute, but `style={{ fill: "var(--x)" }}` does, and
+ * those need a complete colour rather than channels.
+ */
+:root {
+  color-scheme: dark;
+
+  --c-bg: 13 7 20;
+  --c-text: 244 244 246;
+  --c-muted: 138 138 150;
+  --c-primary: 11 79 219;
+  --c-primary-2: 75 133 255;
+  --c-accent: 43 184 245;
+  --c-teal: 94 234 212;
+  --c-lime: 212 255 92;
+  --c-ring: 58 58 68;
+
+  --hex-primary: #0b4fdb;
+  --hex-primary-2: #4b85ff;
+  --hex-accent: #2bb8f5;
+  --hex-teal: #5eead4;
+  --hex-lime: #d4ff5c;
+  --hex-ring: #3a3a44;
+
+  --surface: rgba(255, 255, 255, 0.02);
+  --surface-2: rgba(255, 255, 255, 0.055);
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --chip: rgba(0, 0, 0, 0.55);
+  --faint: rgba(255, 255, 255, 0.15);
+
+  --bg-base: #0d0714;
+  --bg-glow:
+    radial-gradient(1100px 650px at 50% 8%, rgba(20, 44, 110, 0.6), transparent 62%),
+    radial-gradient(800px 500px at 15% 55%, rgba(11, 79, 219, 0.12), transparent 60%),
+    radial-gradient(700px 450px at 88% 70%, rgba(94, 234, 212, 0.05), transparent 60%);
+  --bg-dot: rgba(168, 190, 224, 0.16);
+  --bg-fade: linear-gradient(
+    180deg,
+    rgba(13, 7, 20, 0.85) 0%,
+    transparent 14%,
+    transparent 86%,
+    rgba(13, 7, 20, 0.9) 100%
+  );
+  --btn-sheen: #fff;
+}
+
+/*
+ * Light is not an inversion. Teal and lime at their dark-theme values are far
+ * too pale to read as text on a light field, so they are re-darkened here;
+ * the primary blue is already dark enough to survive unchanged, which is why
+ * the brand colour stays identical across both themes.
+ */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --c-bg: 247 248 252;
+  --c-text: 14 20 38;
+  --c-muted: 88 97 122;
+  --c-primary: 11 79 219;
+  --c-primary-2: 29 78 216;
+  --c-accent: 3 128 178;
+  --c-teal: 13 148 136;
+  --c-lime: 101 133 10;
+  --c-ring: 197 205 222;
+
+  --hex-primary: #0b4fdb;
+  --hex-primary-2: #1d4ed8;
+  --hex-accent: #0380b2;
+  --hex-teal: #0d9488;
+  --hex-lime: #65850a;
+  --hex-ring: #c5cdde;
+
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-2: rgba(255, 255, 255, 0.95);
+  --line: rgba(14, 20, 38, 0.1);
+  --line-strong: rgba(14, 20, 38, 0.24);
+  --chip: rgba(255, 255, 255, 0.82);
+  --faint: rgba(14, 20, 38, 0.14);
+
+  --bg-base: #f7f8fc;
+  --bg-glow:
+    radial-gradient(1100px 650px at 50% 8%, rgba(11, 79, 219, 0.1), transparent 62%),
+    radial-gradient(800px 500px at 15% 55%, rgba(11, 79, 219, 0.06), transparent 60%),
+    radial-gradient(700px 450px at 88% 70%, rgba(13, 148, 136, 0.06), transparent 60%);
+  --bg-dot: rgba(30, 52, 100, 0.14);
+  --bg-fade: linear-gradient(
+    180deg,
+    rgba(247, 248, 252, 0.85) 0%,
+    transparent 14%,
+    transparent 86%,
+    rgba(247, 248, 252, 0.9) 100%
+  );
+  --btn-sheen: rgba(255, 255, 255, 0.9);
+}
+
+/* Theme swap is a paint change on dozens of elements; without this the two
+   palettes cross-fade limb by limb and look broken mid-transition. */
+body,
+.bg-glow,
+.bg-grid,
+.bg-fade {
+  transition: background-color 0.25s ease, background-image 0.25s ease;
+}
+
+/* ---------------------------------------------------------------- chrome -- */
+
 @property --angle {
   syntax: '<angle>';
   initial-value: 0deg;
@@ -23,7 +136,7 @@
   inset: 0;
   border-radius: inherit;
   padding: 1.5px;
-  background: conic-gradient(from var(--angle, 0deg), transparent 0 70%, #fff 85%, transparent 100%);
+  background: conic-gradient(from var(--angle, 0deg), transparent 0 70%, var(--btn-sheen) 85%, transparent 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -34,11 +147,8 @@
 .bg-glow {
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(1100px 650px at 50% 8%, rgba(20,44,110,0.6), transparent 62%),
-    radial-gradient(800px 500px at 15% 55%, rgba(11,79,219,0.12), transparent 60%),
-    radial-gradient(700px 450px at 88% 70%, rgba(94,234,212,0.05), transparent 60%),
-    #0d0714;
+  background-color: var(--bg-base);
+  background-image: var(--bg-glow);
   pointer-events: none;
   z-index: 0;
 }
@@ -46,7 +156,7 @@
 .bg-grid {
   position: fixed;
   inset: 0;
-  background-image: radial-gradient(rgba(168,190,224,0.16) 1px, transparent 1.4px);
+  background-image: radial-gradient(var(--bg-dot) 1px, transparent 1.4px);
   background-size: 24px 24px;
   background-position: -4px -4px;
   pointer-events: none;
@@ -56,57 +166,39 @@
 .bg-fade {
   position: fixed;
   inset: 0;
-  background: linear-gradient(180deg, rgba(13,7,20,0.85) 0%, transparent 14%, transparent 86%, rgba(13,7,20,0.9) 100%);
+  background: var(--bg-fade);
   pointer-events: none;
   z-index: 0;
 }
 
 /* The nav is sticky, so an anchor jump would otherwise land the section's top
-   edge underneath it. scroll-margin-top offsets every anchor target by roughly
-   the nav's height. Doing it here rather than per-section means new sections
-   get it for free. */
+   edge underneath it. */
 section[id] {
   scroll-margin-top: 92px;
 }
 
 /* Smooth anchor scrolling, but only for users who haven't asked for less
-   motion — a full-page smooth scroll is a common vestibular trigger, and it is
-   not covered by the animation/transition overrides further down. */
+   motion — a full-page smooth scroll is a common vestibular trigger. */
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
   }
 }
 
-/* Links and buttons get an explicit focus ring. The browser default is a thin
-   dark outline that is effectively invisible against #0d0714. Inputs are
-   excluded — they define their own ring in Contact.tsx. */
+/* Links and buttons get an explicit focus ring; the browser default is
+   effectively invisible on the dark theme. */
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #4b85ff;
+  outline: 2px solid var(--hex-primary-2);
   outline-offset: 3px;
 }
 
 /* Fades the marquee out at both edges instead of hard-cutting at the viewport.
-   A mask is used rather than gradient overlays because the page background is a
-   fixed vignette — an opaque overlay would have to fake that gradient and would
-   visibly mismatch. Masking punches the text out and lets the real background
-   show through. -webkit- prefix is required for Safari. */
+   A mask rather than gradient overlays, because the page background is a
+   gradient — an opaque overlay would have to fake it and would mismatch. */
 .marquee-mask {
-  -webkit-mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    #000 9%,
-    #000 91%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    90deg,
-    transparent 0%,
-    #000 9%,
-    #000 91%,
-    transparent 100%
-  );
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
 }
 
 @media (prefers-reduced-motion: reduce) {

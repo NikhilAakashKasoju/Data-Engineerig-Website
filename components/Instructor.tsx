@@ -55,7 +55,7 @@ export default function Instructor() {
             aria-hidden
             className="absolute -inset-6 rounded-[2rem] bg-purple/15 blur-[70px]"
           />
-          <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-br from-purple/25 via-[#0e1730] to-teal/10">
+          <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-line bg-gradient-to-br from-purple/25 via-[#0e1730] to-teal/10">
             {/* `fill` + `sizes` lets Next pick a sensible source width per
                 breakpoint and serve WebP/AVIF. The parent is already
                 `relative`, which fill requires. */}
@@ -147,7 +147,7 @@ export default function Instructor() {
                 <a
                   href={s.href}
                   aria-label={s.label}
-                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/[0.09] bg-white/[0.02] text-muted transition-colors hover:border-white/[0.2] hover:bg-white/[0.06] hover:text-text"
+                  className="flex h-11 w-11 items-center justify-center rounded-xl border border-line bg-surface text-muted transition-colors hover:border-line-strong hover:bg-surface-2 hover:text-text"
                 >
                   <svg viewBox="0 0 24 24" fill="currentColor" className="h-[18px] w-[18px]">
                     <path d={s.path} />

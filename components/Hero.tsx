@@ -32,7 +32,7 @@ export default function Hero() {
         <div>
           <motion.div
             variants={fadeUp}
-            className="inline-flex items-center gap-2 rounded-full border border-white/[0.09] bg-teal/[0.04] px-4 py-2 font-mono text-xs tracking-[0.12em] text-teal"
+            className="inline-flex items-center gap-2 rounded-full border border-line bg-teal/[0.06] px-4 py-2 font-mono text-xs tracking-[0.12em] text-teal"
           >
             ✦ INDUSTRY-STANDARD · 100% PROJECT-DRIVEN
           </motion.div>
@@ -86,7 +86,7 @@ export default function Hero() {
             </a>
             <a
               href="#curriculum"
-              className="rounded-full border border-white/[0.09] bg-white/[0.02] px-6 py-4 text-[15px] font-semibold transition-colors hover:border-white/[0.18] hover:bg-white/[0.06]"
+              className="rounded-full border border-line bg-surface px-6 py-4 text-[15px] font-semibold transition-colors hover:border-line-strong hover:bg-surface-2"
             >
               What you&apos;ll learn
             </a>

@@ -1,7 +1,26 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import MotionProvider from "@/components/MotionProvider";
+import ThemeToggle from "@/components/ThemeToggle";
 import "./globals.css";
+
+/**
+ * Runs before first paint, so the correct theme is on <html> by the time the
+ * body renders. Doing this in React instead would paint dark, hydrate, then
+ * flip — the classic flash of wrong theme. It is deliberately tiny and
+ * self-contained; the try/catch covers private-browsing localStorage throws.
+ */
+const THEME_SCRIPT = `
+(function(){
+  try {
+    var stored = localStorage.getItem('theme');
+    var system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.dataset.theme = stored || system;
+  } catch (e) {
+    document.documentElement.dataset.theme = 'dark';
+  }
+})();
+`;
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -45,7 +64,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    // suppressHydrationWarning because the inline script mutates the
+    // data-theme attribute before React hydrates, which React would otherwise
+    // report as a server/client mismatch on <html>.
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} font-body bg-bg text-text overflow-x-hidden`}
       >
@@ -53,6 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="bg-grid" />
         <div className="bg-fade" />
         <MotionProvider>{children}</MotionProvider>
+        <ThemeToggle />
       </body>
     </html>
   );

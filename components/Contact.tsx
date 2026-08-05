@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
 
 const fieldClass =
-  "w-full rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3.5 text-[15px] text-text placeholder:text-muted/70 outline-none transition-colors focus:border-purple/60 focus:ring-2 focus:ring-purple/25";
+  "w-full rounded-xl border border-line bg-surface px-4 py-3.5 text-[15px] text-text placeholder:text-muted/70 outline-none transition-colors focus:border-purple/60 focus:ring-2 focus:ring-purple/25";
 
 const labelClass =
   "block font-mono text-[11px] uppercase tracking-[0.11em] text-muted";
@@ -96,7 +96,7 @@ export default function Contact() {
           <form
             onSubmit={handleSubmit}
             noValidate
-            className="relative rounded-2xl border border-white/[0.08] bg-white/[0.02] p-8 backdrop-blur-sm"
+            className="relative rounded-2xl border border-line bg-surface p-8 backdrop-blur-sm"
           >
             <div className="space-y-5">
               <div>

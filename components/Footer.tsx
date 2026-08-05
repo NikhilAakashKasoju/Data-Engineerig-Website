@@ -24,7 +24,7 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="relative z-10 border-t border-white/[0.07]">
+    <footer className="relative z-10 border-t border-line">
       <div className="mx-auto max-w-[1300px] px-12 py-16">
         <div className="flex flex-col justify-between gap-12 md:flex-row md:gap-20">
           <div>
@@ -59,7 +59,7 @@ export default function Footer() {
           </nav>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-white/[0.07] pt-7 font-mono text-[11px] uppercase tracking-[0.08em] text-muted sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-7 font-mono text-[11px] uppercase tracking-[0.08em] text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} DataForge. All rights reserved.</p>
           <p>Think. Learn. Evolve.</p>
         </div>

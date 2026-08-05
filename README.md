@@ -47,6 +47,23 @@ Open http://localhost:3000
 - [x] Contact form
 - [x] Footer
 
+## Theming
+
+Dark and light are driven by `data-theme` on `<html>`. Both palettes live as CSS
+variables in `app/globals.css`; Tailwind colours resolve through them, so no
+component carries a `dark:` class.
+
+- `components/ThemeToggle.tsx` — fixed bottom-right switch, persists to `localStorage`
+- The inline script in `app/layout.tsx` applies the stored/system theme **before
+  first paint** — remove it and you get a flash of the wrong theme on every load
+- Adding a colour: add it to both blocks in `globals.css`, then reference it in
+  `tailwind.config.ts`. Channel triplets (`13 7 20`) for anything needing
+  `/opacity`; full rgba for `surface` / `line` / `chip` / `faint`
+- Inline SVG uses the `--hex-*` duplicates via `style`, because `var()` is not
+  valid in an SVG presentation attribute
+- Curriculum stage panels and Resources cover tiles stay dark in **both** themes
+  by design — they're media tiles, and their artwork would wash out on a light field
+
 ## Palette
 
 Primary is `#0b4fdb`. The Tailwind tokens are still named `purple`, `purple-2`

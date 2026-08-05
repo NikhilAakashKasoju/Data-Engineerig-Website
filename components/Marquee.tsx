@@ -26,7 +26,7 @@ const ITEMS = [
 export default function Marquee() {
   return (
     <section
-      className="marquee-mask relative z-10 overflow-hidden border-y border-white/[0.06] py-7"
+      className="marquee-mask relative z-10 overflow-hidden border-y border-line py-7"
       aria-label="Course topics"
     >
       <div className="flex w-max animate-marquee will-change-transform hover:[animation-play-state:paused]">

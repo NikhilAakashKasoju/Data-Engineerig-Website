@@ -1,22 +1,42 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Colours resolve through CSS variables rather than literal hex, so switching
+ * `data-theme` on <html> re-themes the whole site without a single `dark:`
+ * class in the components.
+ *
+ * The channel-triplet form — `13 7 20` rather than `#0d0714` — is what makes
+ * Tailwind's opacity modifiers keep working: `bg-bg/70` compiles to
+ * `rgb(var(--c-bg) / 0.7)`. A var holding a full hex would break every `/xx`
+ * on the site.
+ *
+ * `surface` / `line` / `chip` hold complete rgba values instead, because their
+ * alpha differs per theme (white at 2% on dark, white at 75% on light) and so
+ * cannot be expressed as one channel triplet plus a fixed modifier.
+ */
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        bg: "#0d0714",
-        text: "#f4f4f6",
-        muted: "#8a8a96",
-        // Token names kept as purple/purple-2/magenta even though the values are
-        // now blues. Renaming them would touch every component for no visual
-        // gain; they read as "primary / primary-light / primary-accent".
-        purple: "#0b4fdb",
-        "purple-2": "#4b85ff",
-        magenta: "#2bb8f5",
-        teal: "#5eead4",
-        lime: "#d4ff5c",
-        ring: "#3a3a44",
+        bg: "rgb(var(--c-bg) / <alpha-value>)",
+        text: "rgb(var(--c-text) / <alpha-value>)",
+        muted: "rgb(var(--c-muted) / <alpha-value>)",
+        // Names kept from the original violet palette; read them as
+        // primary / primary-light / primary-accent.
+        purple: "rgb(var(--c-primary) / <alpha-value>)",
+        "purple-2": "rgb(var(--c-primary-2) / <alpha-value>)",
+        magenta: "rgb(var(--c-accent) / <alpha-value>)",
+        teal: "rgb(var(--c-teal) / <alpha-value>)",
+        lime: "rgb(var(--c-lime) / <alpha-value>)",
+        ring: "rgb(var(--c-ring) / <alpha-value>)",
+
+        surface: "var(--surface)",
+        "surface-2": "var(--surface-2)",
+        line: "var(--line)",
+        "line-strong": "var(--line-strong)",
+        chip: "var(--chip)",
+        faint: "var(--faint)",
       },
       fontFamily: {
         display: ["var(--font-space-grotesk)", "sans-serif"],
