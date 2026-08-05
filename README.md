@@ -28,6 +28,7 @@ Open http://localhost:3000
 - `components/Connector.tsx` — scroll-scrubbed teal arrow drawn between modules
 - `components/Phases.tsx` — all 13 curriculum phases
 - `components/Resources.tsx` — free YouTube playlist cards
+- `components/LiveClass.tsx` — upcoming live session (placeholder data)
 - `components/Pricing.tsx` — raised offer panel
 - `components/Instructor.tsx` — bio, portrait card and stats
 - `components/Contact.tsx` — syllabus request form
@@ -95,3 +96,7 @@ to the address that owns the Resend account. Verify a domain and set
   duration and routes to contact instead of quoting a number.
 - Site is branded "DataForge" while the course is Edufulness / Atchyut Kumar.
   Deliberate for now — confirm before launch.
+- Live class details are PLACEHOLDER. Edit the `UPCOMING` object at the top of
+  `components/LiveClass.tsx` (topic, month, day, date, time, duration, blurb,
+  highlights) and set `LIVE_CLASS_REGISTER_URL` in `lib/site.ts` — it currently
+  falls back to WhatsApp.

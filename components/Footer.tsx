@@ -7,6 +7,7 @@ const COLUMNS = [
       { label: "Curriculum", href: "#curriculum" },
       { label: "All 13 phases", href: "#phases" },
       { label: "Free resources", href: "#resources" },
+      { label: "Live classes", href: "#live" },
       { label: "Enroll", href: "#course" },
       { label: "Instructor", href: "#instructor" },
     ],
