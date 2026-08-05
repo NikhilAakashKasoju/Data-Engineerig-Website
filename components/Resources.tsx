@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
+import ResourceArt, { type ResourceArtName } from "./ResourceArt";
 
 /**
  * Titles and video counts are read off the actual YouTube playlists, not
@@ -17,6 +18,7 @@ type Resource = {
   count: string;
   tag: string;
   accent: string;
+  art: ResourceArtName;
 };
 
 const RESOURCES: Resource[] = [
@@ -26,6 +28,7 @@ const RESOURCES: Resource[] = [
     count: "39 videos",
     tag: "Data Factory",
     accent: "#4b85ff",
+    art: "adf",
   },
   {
     title: "Real-Time Scenarios: Azure Data Factory",
@@ -33,6 +36,7 @@ const RESOURCES: Resource[] = [
     count: "9 videos",
     tag: "Scenarios",
     accent: "#2bb8f5",
+    art: "scenarios",
   },
   {
     title: "Azure Databricks — PySpark Tutorials",
@@ -40,6 +44,7 @@ const RESOURCES: Resource[] = [
     count: "4 videos",
     tag: "Databricks",
     accent: "#5eead4",
+    art: "databricks",
   },
   {
     title: "SQL — Interview Questions",
@@ -47,6 +52,7 @@ const RESOURCES: Resource[] = [
     count: "4 videos",
     tag: "SQL",
     accent: "#d4ff5c",
+    art: "sql",
   },
   {
     title: "PySpark Shorts",
@@ -54,6 +60,7 @@ const RESOURCES: Resource[] = [
     count: "10 videos",
     tag: "PySpark",
     accent: "#7aa7ff",
+    art: "shorts",
   },
   {
     title: "EduFulness on YouTube",
@@ -61,6 +68,7 @@ const RESOURCES: Resource[] = [
     count: "Channel",
     tag: "Everything else",
     accent: "#4b85ff",
+    art: "channel",
   },
 ];
 
@@ -93,26 +101,31 @@ function Card({ item }: { item: Resource }) {
           values. */}
       <div
         className="relative aspect-video overflow-hidden rounded-xl border border-line"
-        style={{ background: `linear-gradient(140deg, ${item.accent}33, #0c1428 65%)` }}
+        style={{ background: `linear-gradient(140deg, ${item.accent}26, #0b1224 62%)` }}
       >
         <div
           aria-hidden
-          className="absolute inset-0 opacity-20"
+          className="absolute inset-0 opacity-[0.14]"
           style={{
             backgroundImage: `radial-gradient(${item.accent} 1px, transparent 1.4px)`,
             backgroundSize: "14px 14px",
           }}
         />
 
+        <ResourceArt name={item.art} accent={item.accent} />
+
+        {/* Play badge sits over the art rather than replacing it: smaller than
+            before and translucent, so it still reads as a video without hiding
+            what the tile is illustrating. */}
         <span className="absolute inset-0 flex items-center justify-center">
           <span
-            className="flex h-14 w-14 items-center justify-center rounded-full border backdrop-blur-sm transition-transform duration-300 group-hover:scale-110"
+            className="flex h-12 w-12 items-center justify-center rounded-full border backdrop-blur-md transition-transform duration-300 group-hover:scale-110"
             style={{
-              borderColor: `${item.accent}66`,
-              backgroundColor: `${item.accent}24`,
+              borderColor: `${item.accent}80`,
+              backgroundColor: "rgba(6,12,26,0.55)",
             }}
           >
-            <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6" fill={item.accent} aria-hidden>
+            <svg viewBox="0 0 24 24" className="ml-0.5 h-5 w-5" fill={item.accent} aria-hidden>
               <path d="M8 5v14l11-7L8 5Z" />
             </svg>
           </span>
