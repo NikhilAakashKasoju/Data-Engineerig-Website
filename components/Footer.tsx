@@ -60,7 +60,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-line pt-7 font-mono text-[11px] uppercase tracking-[0.08em] text-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} DataForge. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} EduFulness. All rights reserved.</p>
           <p>Think. Learn. Evolve.</p>
         </div>
       </div>

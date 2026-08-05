@@ -112,8 +112,11 @@ to the address that owns the Resend account. Verify a domain and set
   currently uses 180–220 / 4–5 months. Confirm which is right.
 - No course fee appears anywhere in the PDF, so the pricing panel leads with
   duration and routes to contact instead of quoting a number.
-- Site is branded "DataForge" while the course is Edufulness / Atchyut Kumar.
-  Deliberate for now — confirm before launch.
+- The visible brand is now EduFulness (logo + footer), but `app/layout.tsx`
+  metadata still says "DataForge" — so the browser tab and link previews
+  disagree with the logo. One-line fix once the name is settled.
+- No favicon. `public/efnlogo.png` is 3.9:1, too wide to use as one; a square
+  export dropped in as `app/icon.png` is picked up automatically by Next.
 - Resource cards use drawn cover art, not real YouTube thumbnails. Thumbnails
   need a video ID (`i.ytimg.com/vi/<id>/hqdefault.jpg`) which a playlist URL
   doesn't expose — that needs the YouTube Data API plus a `remotePatterns`
