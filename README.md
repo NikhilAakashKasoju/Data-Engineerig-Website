@@ -27,6 +27,7 @@ Open http://localhost:3000
 - `scripts/extract-instructor-photo.py` — pulls the portrait out of the source PDF
 - `components/Connector.tsx` — scroll-scrubbed teal arrow drawn between modules
 - `components/Phases.tsx` — all 13 curriculum phases
+- `components/Resources.tsx` — free YouTube playlist cards
 - `components/Pricing.tsx` — raised offer panel
 - `components/Instructor.tsx` — bio, portrait card and stats
 - `components/Contact.tsx` — syllabus request form
@@ -44,6 +45,23 @@ Open http://localhost:3000
 - [x] Instructor section
 - [x] Contact form
 - [x] Footer
+
+## Palette
+
+Primary is `#0b4fdb`. The Tailwind tokens are still named `purple`, `purple-2`
+and `magenta` for historical reasons — read them as primary, primary-light and
+primary-accent:
+
+| Token      | Value     | Role                                  |
+| ---------- | --------- | ------------------------------------- |
+| `purple`   | `#0b4fdb` | Primary — buttons, borders, glows     |
+| `purple-2` | `#4b85ff` | Lighter blue — eyebrows, gradient end |
+| `magenta`  | `#2bb8f5` | Cyan accent — gradient end, art       |
+| `teal`     | `#5eead4` | Unchanged                             |
+| `lime`     | `#d4ff5c` | Unchanged                             |
+
+Gradient buttons run `purple → #2f74f0`. Bronze/silver/gold in `StageArt.tsx`
+sit outside the palette on purpose (see the comment in that file).
 
 ## Contact form email
 

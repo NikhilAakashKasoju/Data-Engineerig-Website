@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import Marquee from "@/components/Marquee";
 import Curriculum from "@/components/Curriculum";
 import Phases from "@/components/Phases";
+import Resources from "@/components/Resources";
 import Pricing from "@/components/Pricing";
 import Instructor from "@/components/Instructor";
 import Contact from "@/components/Contact";
@@ -17,6 +18,7 @@ export default function Home() {
         <Marquee />
         <Curriculum />
         <Phases />
+        <Resources />
         <Pricing />
         <Instructor />
         <Contact />

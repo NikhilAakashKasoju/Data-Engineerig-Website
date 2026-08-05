@@ -71,7 +71,7 @@ export default function Hero() {
               href={ENROLL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary inline-flex items-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-[26px] py-4 text-[15px] font-semibold text-white"
+              className="btn-primary inline-flex items-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-[26px] py-4 text-[15px] font-semibold text-white"
             >
               Enroll in the Course
               <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">

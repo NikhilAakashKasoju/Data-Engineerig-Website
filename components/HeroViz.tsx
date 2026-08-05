@@ -38,9 +38,9 @@ function isoFaces(cx: number, cy: number, w: number, h: number) {
 
 const CUBES = [
   { cx: 150, cy: 178, w: 46, h: 58, color: "#5eead4", tilt: -6, delay: 0 },
-  { cx: 300, cy: 288, w: 53, h: 68, color: "#c94fef", tilt: 5, delay: 0.7 },
-  { cx: 142, cy: 402, w: 44, h: 56, color: "#b06bff", tilt: -4, delay: 1.4 },
-  { cx: 302, cy: 512, w: 50, h: 63, color: "#8b3ffb", tilt: 7, delay: 2.1 },
+  { cx: 300, cy: 288, w: 53, h: 68, color: "#2bb8f5", tilt: 5, delay: 0.7 },
+  { cx: 142, cy: 402, w: 44, h: 56, color: "#4b85ff", tilt: -4, delay: 1.4 },
+  { cx: 302, cy: 512, w: 50, h: 63, color: "#0b4fdb", tilt: 7, delay: 2.1 },
 ];
 
 /** Threads through the cube centres so the assembly still reads as a pipeline. */
@@ -162,8 +162,8 @@ export default function HeroViz() {
         >
           <defs>
             <linearGradient id="vizPipe" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#8b3ffb" />
-              <stop offset="100%" stopColor="#c94fef" />
+              <stop offset="0%" stopColor="#0b4fdb" />
+              <stop offset="100%" stopColor="#2bb8f5" />
             </linearGradient>
           </defs>
 

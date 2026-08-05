@@ -55,7 +55,7 @@ export default function Instructor() {
             aria-hidden
             className="absolute -inset-6 rounded-[2rem] bg-purple/15 blur-[70px]"
           />
-          <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-br from-purple/25 via-[#1a1030] to-teal/10">
+          <div className="relative aspect-square w-full overflow-hidden rounded-2xl border border-white/[0.08] bg-gradient-to-br from-purple/25 via-[#0e1730] to-teal/10">
             {/* `fill` + `sizes` lets Next pick a sensible source width per
                 breakpoint and serve WebP/AVIF. The parent is already
                 `relative`, which fill requires. */}

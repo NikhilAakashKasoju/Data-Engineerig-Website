@@ -6,6 +6,7 @@ const COLUMNS = [
     links: [
       { label: "Curriculum", href: "#curriculum" },
       { label: "All 13 phases", href: "#phases" },
+      { label: "Free resources", href: "#resources" },
       { label: "Enroll", href: "#course" },
       { label: "Instructor", href: "#instructor" },
     ],

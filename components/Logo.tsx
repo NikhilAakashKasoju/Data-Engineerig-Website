@@ -16,7 +16,7 @@ export default function Logo({ className = "" }: { className?: string }) {
       aria-label="DataForge — back to top"
       className={`inline-flex items-center gap-2.5 rounded-lg font-display text-lg font-bold tracking-tight transition-opacity hover:opacity-80 ${className}`}
     >
-      <span className="flex h-[30px] w-[30px] items-center justify-center rounded-lg bg-gradient-to-br from-purple to-magenta shadow-[0_4px_14px_rgba(139,63,251,0.35)]">
+      <span className="flex h-[30px] w-[30px] items-center justify-center rounded-lg bg-gradient-to-br from-purple to-magenta shadow-[0_4px_14px_rgba(11,79,219,0.4)]">
         <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4" aria-hidden>
           <path
             d="M4 6c0-1.1 3.6-2 8-2s8 .9 8 2-3.6 2-8 2-8-.9-8-2Z"

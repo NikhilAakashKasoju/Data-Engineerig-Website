@@ -128,7 +128,7 @@ const MODULES: ModuleItem[] = [
 
 function Panel({ item }: { item: ModuleItem }) {
   return (
-    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/[0.07] bg-gradient-to-br from-purple/[0.14] via-[#150e26] to-teal/[0.06]">
+    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-2xl border border-white/[0.07] bg-gradient-to-br from-purple/[0.14] via-[#0c1428] to-teal/[0.06]">
       <StageArt name={item.art} />
       <span className="absolute bottom-4 left-4 rounded-md bg-black/55 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-text backdrop-blur-sm">
         {item.title}

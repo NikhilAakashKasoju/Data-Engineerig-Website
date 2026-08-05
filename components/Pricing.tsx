@@ -133,7 +133,7 @@ export default function Pricing() {
 
             <a
               href="#contact"
-              className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
+              className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
               Request the syllabus
               <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
@@ -159,7 +159,7 @@ export default function Pricing() {
               href={ENROLL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
+              className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
               Enroll Now
               <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">

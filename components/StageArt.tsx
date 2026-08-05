@@ -62,9 +62,9 @@ function Ingest() {
       {/* Funnel — the whole point of the ingest stage in one shape. */}
       <polygon
         points="300,124 392,124 355,194 355,236 337,236 337,194"
-        fill="#8b3ffb"
+        fill="#0b4fdb"
         fillOpacity="0.22"
-        stroke="#b06bff"
+        stroke="#4b85ff"
         strokeWidth="2"
         strokeLinejoin="round"
       />
@@ -72,22 +72,22 @@ function Ingest() {
       <path
         d="M346,238 C346,272 402,272 444,244"
         fill="none"
-        stroke="#c94fef"
+        stroke="#2bb8f5"
         strokeWidth="2"
         strokeDasharray="6 10"
         className="animate-field"
       />
 
       <g>
-        <path d="M452,206 v54 a53,16 0 0 0 106,0 v-54" fill="#c94fef" fillOpacity="0.2" />
+        <path d="M452,206 v54 a53,16 0 0 0 106,0 v-54" fill="#2bb8f5" fillOpacity="0.2" />
         <path
           d="M452,206 v54 a53,16 0 0 0 106,0 v-54"
           fill="none"
-          stroke="#c94fef"
+          stroke="#2bb8f5"
           strokeWidth="2"
         />
-        <ellipse cx="505" cy="206" rx="53" ry="16" fill="#c94fef" fillOpacity="0.45" />
-        <ellipse cx="505" cy="206" rx="53" ry="16" fill="none" stroke="#c94fef" strokeWidth="2" />
+        <ellipse cx="505" cy="206" rx="53" ry="16" fill="#2bb8f5" fillOpacity="0.45" />
+        <ellipse cx="505" cy="206" rx="53" ry="16" fill="none" stroke="#2bb8f5" strokeWidth="2" />
       </g>
     </>
   );
@@ -181,9 +181,9 @@ function Transform() {
           cx="320"
           cy="180"
           r="46"
-          fill="#8b3ffb"
+          fill="#0b4fdb"
           fillOpacity="0.12"
-          stroke="#b06bff"
+          stroke="#4b85ff"
           strokeWidth="2"
           strokeDasharray="5 8"
           className="animate-field"
@@ -215,7 +215,7 @@ function Transform() {
             width="46"
             height="46"
             rx="9"
-            fill={row === 0 ? "#5eead4" : row === 1 ? "#b06bff" : "#c94fef"}
+            fill={row === 0 ? "#5eead4" : row === 1 ? "#4b85ff" : "#2bb8f5"}
             fillOpacity="0.55"
           />
         )),
@@ -228,9 +228,9 @@ function Transform() {
 
 const DAG_NODES = [
   { x: 92, y: 180, fill: "#5eead4" },
-  { x: 262, y: 100, fill: "#b06bff" },
-  { x: 262, y: 260, fill: "#b06bff" },
-  { x: 432, y: 180, fill: "#c94fef" },
+  { x: 262, y: 100, fill: "#4b85ff" },
+  { x: 262, y: 260, fill: "#4b85ff" },
+  { x: 432, y: 180, fill: "#2bb8f5" },
   { x: 556, y: 180, fill: "#d4ff5c" },
 ];
 
@@ -250,7 +250,7 @@ function Orchestrate() {
           key={i}
           d={d}
           fill="none"
-          stroke="#8b3ffb"
+          stroke="#0b4fdb"
           strokeOpacity="0.75"
           strokeWidth="2"
           strokeDasharray="6 9"
@@ -302,12 +302,12 @@ function Orchestrate() {
 /* ----------------------------------------------------------------- serve -- */
 
 const BARS = [
-  [0.42, "#8b3ffb"],
-  [0.66, "#b06bff"],
-  [0.34, "#8b3ffb"],
-  [0.86, "#c94fef"],
-  [0.58, "#b06bff"],
-  [0.72, "#c94fef"],
+  [0.42, "#0b4fdb"],
+  [0.66, "#4b85ff"],
+  [0.34, "#0b4fdb"],
+  [0.86, "#2bb8f5"],
+  [0.58, "#4b85ff"],
+  [0.72, "#2bb8f5"],
 ] as const;
 
 function Serve() {

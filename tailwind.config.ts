@@ -8,9 +8,12 @@ const config: Config = {
         bg: "#0d0714",
         text: "#f4f4f6",
         muted: "#8a8a96",
-        purple: "#8b3ffb",
-        "purple-2": "#b06bff",
-        magenta: "#c94fef",
+        // Token names kept as purple/purple-2/magenta even though the values are
+        // now blues. Renaming them would touch every component for no visual
+        // gain; they read as "primary / primary-light / primary-accent".
+        purple: "#0b4fdb",
+        "purple-2": "#4b85ff",
+        magenta: "#2bb8f5",
         teal: "#5eead4",
         lime: "#d4ff5c",
         ring: "#3a3a44",

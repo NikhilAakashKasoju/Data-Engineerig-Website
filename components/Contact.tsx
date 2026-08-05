@@ -74,7 +74,7 @@ export default function Contact() {
 
           <a
             href="https://wa.me/919567034641"
-            className="btn-primary mt-8 inline-flex items-center justify-center rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
+            className="btn-primary mt-8 inline-flex items-center justify-center rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
           >
             Message on WhatsApp
           </a>
@@ -147,7 +147,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === "submitting"}
-              className="btn-primary mt-7 inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-br from-purple to-[#a24bff] px-7 py-4 text-[15px] font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+              className="btn-primary mt-7 inline-flex w-full items-center justify-center gap-2.5 rounded-xl bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
             >
               {status === "submitting" ? "Sending…" : "Submit"}
               <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">

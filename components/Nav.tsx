@@ -9,6 +9,7 @@ import Logo from "./Logo";
 const LINKS = [
   { label: "Curriculum", href: "#curriculum" },
   { label: "Phases", href: "#phases" },
+  { label: "Free Resources", href: "#resources" },
   { label: "Program", href: "#course" },
   { label: "Instructor", href: "#instructor" },
   { label: "Contact", href: "#contact" },
@@ -32,9 +33,11 @@ export default function Nav() {
           nav pushes the whole cluster against the right edge with the logo
           alone on the left — rather than the links floating in the centre. */}
       <div className="flex items-center gap-10">
-        {/* lg, not md: five links plus the logo and the CTA measure wider than a
-            768px viewport, so at md they would collide with the button. */}
-        <ul className="hidden list-none gap-8 text-[14.5px] text-muted lg:flex">
+        {/* lg, not md: the links plus the logo and the CTA measure wider than a
+            768px viewport, so at md they would collide with the button. gap-6
+            until xl because "Free Resources" pushed the row close to the 1024px
+            edge — the wider gap comes back once there's room for it. */}
+        <ul className="hidden list-none gap-6 text-[14.5px] text-muted lg:flex xl:gap-8">
           {LINKS.map((item) => (
             <li key={item.href}>
               <a href={item.href} className="transition-colors hover:text-text">
@@ -49,7 +52,7 @@ export default function Nav() {
             The hero and pricing CTAs are the ones that hand off to checkout. */}
         <a
           href="#course"
-          className="shrink-0 rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(139,63,251,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_22px_rgba(139,63,251,0.5)]"
+          className="shrink-0 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(11,79,219,0.4)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_22px_rgba(11,79,219,0.55)]"
         >
           Enroll Now
         </a>
