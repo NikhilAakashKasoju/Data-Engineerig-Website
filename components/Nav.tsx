@@ -44,6 +44,9 @@ export default function Nav() {
           ))}
         </ul>
 
+        {/* Scrolls to the pricing panel rather than leaving for Udemy — the nav
+            is persistent, so it should move you around the page, not off it.
+            The hero and pricing CTAs are the ones that hand off to checkout. */}
         <a
           href="#course"
           className="shrink-0 rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-5 py-2.5 text-sm font-semibold text-white shadow-[0_4px_18px_rgba(139,63,251,0.35)] transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_22px_rgba(139,63,251,0.5)]"

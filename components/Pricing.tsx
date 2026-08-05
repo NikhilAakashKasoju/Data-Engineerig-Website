@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
+import { ENROLL_URL, WHATSAPP_URL } from "@/lib/site";
 
 const iconProps = {
   viewBox: "0 0 24 24",
@@ -147,13 +148,17 @@ export default function Pricing() {
             </a>
 
             <a
-              href="https://wa.me/919567034641"
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-3 block text-center font-mono text-[10.5px] uppercase tracking-[0.09em] text-muted transition-colors hover:text-text"
             >
               Or call / WhatsApp 9567034641
             </a>
-             <a
-              href="https://www.udemy.com/course/azure-data-factory-data-engineer-real-time-projects/?couponCode=EFNJUL26BEST"
+            <a
+              href={ENROLL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
               Enroll Now

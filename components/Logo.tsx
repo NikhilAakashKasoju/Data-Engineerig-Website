@@ -27,7 +27,7 @@ export default function Logo({ className = "" }: { className?: string }) {
           <path d="M4 12c0 1.1 3.6 2 8 2s8-.9 8-2" stroke="#fff" strokeWidth="1.6" />
         </svg>
       </span>
-      DataForge
+      Edufulness - Azure Data Engineering Course Overview
     </a>
   );
 }

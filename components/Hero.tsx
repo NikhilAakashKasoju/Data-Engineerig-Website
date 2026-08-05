@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
+import { ENROLL_URL } from "@/lib/site";
 import HeroViz from "./HeroViz";
 
 // Every figure here is off the curriculum PDF cover page. The previous values
@@ -62,8 +63,14 @@ export default function Hero() {
           </motion.p>
 
           <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-4">
+            {/* Hands off to the Udemy checkout. rel="noopener noreferrer" is
+                required alongside target="_blank" — without it the opened page
+                gets a window.opener handle back to this one and can navigate it
+                elsewhere (reverse tabnabbing). */}
             <a
-              href="#course"
+              href={ENROLL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary inline-flex items-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#a24bff] px-[26px] py-4 text-[15px] font-semibold text-white"
             >
               Enroll in the Course
