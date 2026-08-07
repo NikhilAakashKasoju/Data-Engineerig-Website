@@ -38,9 +38,9 @@ const jetbrains = JetBrains_Mono({
   variable: "--font-jetbrains",
 });
 
-const TITLE = "DataForge — Master End-to-End Azure Data Engineering";
+const TITLE = "EduFulness — Master End-to-End Azure Data Engineering";
 const DESCRIPTION =
-  "An industry-standard, project-driven curriculum: 33 modules across 13 phases covering SQL, Azure Data Factory, Databricks, PySpark and Delta Lake, ending in a full retail lakehouse build.";
+  "An industry-standard, project-driven curriculum: 33 modules across 13 phases covering SQL, Azure Data Factory, Databricks, PySpark and Delta Lake, ending in a full retail lakehouse build. Think. Learn. Evolve.";
 
 export const metadata: Metadata = {
   // TODO: set to the real production origin before deploying. Without
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     title: TITLE,
     description: DESCRIPTION,
     type: "website",
-    siteName: "DataForge",
+    siteName: "EduFulness",
   },
   twitter: {
     card: "summary_large_image",
