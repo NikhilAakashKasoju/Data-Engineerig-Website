@@ -1,4 +1,5 @@
 import Logo from "./Logo";
+import { ADMIN_URL } from "@/lib/site";
 
 const COLUMNS = [
   {
@@ -17,7 +18,7 @@ const COLUMNS = [
     links: [
       { label: "Atchyut Kumar", href: "#instructor" },
       { label: "edufulness.com", href: "https://www.edufulness.com" },
-      { label: "WhatsApp: 9567034641", href: "https://wa.me/919567034641" },
+      { label: "WhatsApp channel", href: "https://whatsapp.com/channel/0029Val125n2UPBNAPAprU1G" },
     ],
   },
 ];
@@ -25,7 +26,7 @@ const COLUMNS = [
 export default function Footer() {
   return (
     <footer className="relative z-10 border-t border-line">
-      <div className="mx-auto max-w-[1300px] px-12 py-16">
+      <div className="mx-auto max-w-[1300px] px-5 py-12 sm:px-8 sm:py-16 lg:px-12">
         <div className="flex flex-col justify-between gap-12 md:flex-row md:gap-20">
           <div>
             <Logo />
@@ -36,7 +37,7 @@ export default function Footer() {
 
           {/* nav landmark so the footer links are reachable as a group rather
               than as loose text at the end of the document. */}
-          <nav aria-label="Footer" className="flex gap-16 sm:gap-24">
+          <nav aria-label="Footer" className="flex gap-10 sm:gap-16 md:gap-24">
             {COLUMNS.map((col) => (
               <div key={col.heading}>
                 <h2 className="font-mono text-[11px] uppercase tracking-[0.12em] text-muted">
@@ -61,7 +62,17 @@ export default function Footer() {
 
         <div className="mt-16 flex flex-col gap-3 border-t border-line pt-7 font-mono text-[11px] uppercase tracking-[0.08em] text-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} EduFulness. All rights reserved.</p>
-          <p>Think. Learn. Evolve.</p>
+          <div className="flex items-center gap-5">
+            <p>Think. Learn. Evolve.</p>
+            {/* The conventional home for an admin entry point — present but not
+                advertised. */}
+            <a
+              href={ADMIN_URL}
+              className="transition-colors hover:text-text"
+            >
+              Admin login
+            </a>
+          </div>
         </div>
       </div>
     </footer>

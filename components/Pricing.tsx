@@ -16,7 +16,7 @@ const iconProps = {
 
 const FEATURES = [
   {
-    label: "180–220 hours · 4–5 months",
+    label: "70–80 hours · 3–4 months",
     icon: (
       <svg {...iconProps}>
         <circle cx="12" cy="12" r="8.5" />
@@ -46,7 +46,7 @@ const FEATURES = [
 
 export default function Pricing() {
   return (
-    <section id="course" className="relative z-10 mx-auto max-w-[1300px] px-12 py-28">
+    <section id="course" className="relative z-10 mx-auto max-w-[1300px] px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -79,12 +79,12 @@ export default function Pricing() {
           className="absolute -top-10 left-1/2 h-40 w-[70%] -translate-x-1/2 rounded-full bg-purple/20 blur-[80px]"
         />
 
-        <div className="relative grid grid-cols-1 gap-10 rounded-3xl border border-line bg-surface p-10 backdrop-blur-sm md:grid-cols-[1.5fr_1fr] md:gap-0 md:p-12">
+        <div className="relative grid grid-cols-1 gap-8 rounded-3xl border border-line bg-surface p-6 backdrop-blur-sm sm:gap-10 sm:p-10 md:grid-cols-[1.5fr_1fr] md:gap-0 md:p-12">
           {/* ------------------------------------------------- left column -- */}
           <div className="md:pr-12">
             <span className="inline-flex items-center gap-2.5 rounded-full border border-purple/40 bg-purple/10 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.11em] text-purple-2">
               <span className="h-1.5 w-1.5 rounded-full bg-lime" />
-              Weekend batch · 100% project-driven
+              Weekday & weekend batches · 100% project-driven
             </span>
 
             <h3 className="mt-6 max-w-[540px] font-display text-[clamp(24px,2.6vw,32px)] font-bold leading-[1.18] tracking-tight">
@@ -124,10 +124,10 @@ export default function Pricing() {
 
             <p className="mt-3">
               <b className="font-display text-[clamp(38px,4.4vw,52px)] font-bold leading-none tracking-tight">
-                180–220
+                70–80
               </b>
               <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.09em] text-muted">
-                Hours · 4–5 months · weekend batch
+                Hours · 3–4 months · weekday & weekend batches
               </span>
             </p>
 
@@ -153,7 +153,7 @@ export default function Pricing() {
               rel="noopener noreferrer"
               className="mt-3 block text-center font-mono text-[10.5px] uppercase tracking-[0.09em] text-muted transition-colors hover:text-text"
             >
-              Or call / WhatsApp 9567034641
+              Join WhatsApp channel for updates
             </a>
             <a
               href={ENROLL_URL}
@@ -161,7 +161,7 @@ export default function Pricing() {
               rel="noopener noreferrer"
               className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
-              Enroll Now
+              Enroll Now in UDEMY
               <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
                 <path
                   d="M5 12h14M13 6l6 6-6 6"

@@ -5,3 +5,14 @@ out
 .DS_Store
 *.log
 .vercel
+
+# Live credentials: database password and the admin bcrypt hash.
+# config.example.php is the version that belongs in the repo.
+masterclass-backend/config.php
+
+# PHP writes this next to the scripts on the server; it can contain
+# request details from failed submissions.
+masterclass-backend/error_log
+
+# Scratch file for multi-line commit messages on Windows (git commit -F).
+COMMIT_MSG.txt

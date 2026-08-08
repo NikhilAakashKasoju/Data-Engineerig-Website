@@ -95,7 +95,7 @@ const QUESTION_BANK = [
 
 export default function Phases() {
   return (
-    <section id="phases" className="relative z-10 mx-auto max-w-[1300px] px-12 pb-28">
+    <section id="phases" className="relative z-10 mx-auto max-w-[1300px] px-5 pb-20 sm:px-8 sm:pb-28 lg:px-12">
       <motion.div
         variants={fadeUp}
         initial="hidden"

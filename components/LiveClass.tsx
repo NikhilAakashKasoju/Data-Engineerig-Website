@@ -1,28 +1,43 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
-import { LIVE_CLASS_REGISTER_URL } from "@/lib/site";
+import { LIVE_CLASS_ENDPOINT, LIVE_CLASS_REGISTER_URL, WHATSAPP_URL } from "@/lib/site";
+
+type Session = {
+  enabled: boolean | null;
+  topic: string;
+  month: string;
+  day: string;
+  dateText: string;
+  timeText: string;
+  modeText: string;
+  blurb: string;
+  highlights: string[];
+  registerUrl: string;
+  registerNote: string;
+};
 
 /**
- * PLACEHOLDER DATA — every field below needs replacing with the real session.
- * The topic is a genuine curriculum item (Module 10) so it reads plausibly, but
- * the date, time and duration are invented. Keeping it all in one object means
- * updating a session is editing five strings, not hunting through markup.
+ * Baked-in default, replaced at runtime by whatever live-class.php returns.
  *
- * `month` / `day` drive the calendar tile; `date` is the full human-readable
- * string. They are separate fields rather than a parsed Date because a real
- * Date would need timezone handling and would render differently on server and
- * client — a hydration mismatch for zero benefit on a value that is typed by
- * hand anyway.
+ * This exists because the site is a static export: content is fixed at build
+ * time, so a CMS edit can't change the HTML on disk. Shipping real values as
+ * the default means the section paints immediately with no skeleton and no
+ * layout shift, and still shows something if the endpoint is unreachable — the
+ * fetch only ever *replaces* content, never creates it.
+ *
+ * Keep this roughly in sync with the row seeded in schema.sql.
  */
-const UPCOMING = {
+const FALLBACK: Session = {
+  enabled: true,
   topic: "Building a Metadata-Driven Ingestion Framework in ADF",
   month: "Aug",
   day: "22",
-  date: "Saturday, 22 August 2026",
-  time: "10:00 AM IST",
-  duration: "90 minutes",
+  dateText: "Saturday, 22 August 2026",
+  timeText: "10:00 AM IST · 90 minutes",
+  modeText: "Online · free to attend",
   blurb:
     "A working session on the pattern that separates senior data engineers from everyone else: one pipeline, driven by metadata tables, handling full and incremental loads across any number of sources.",
   highlights: [
@@ -30,6 +45,8 @@ const UPCOMING = {
     "Drive a single pipeline with ForEach and dynamic content",
     "Live Q&A with Atchyut at the end",
   ],
+  registerUrl: LIVE_CLASS_REGISTER_URL,
+  registerNote: "No payment required",
 };
 
 const iconProps = {
@@ -42,35 +59,26 @@ const iconProps = {
   className: "h-[17px] w-[17px]",
 };
 
-const DETAILS = [
-  {
-    label: UPCOMING.date,
-    icon: (
-      <svg {...iconProps}>
-        <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
-        <path d="M3.5 9.5h17M8 3.5v3M16 3.5v3" />
-      </svg>
-    ),
-  },
-  {
-    label: `${UPCOMING.time} · ${UPCOMING.duration}`,
-    icon: (
-      <svg {...iconProps}>
-        <circle cx="12" cy="12" r="8.5" />
-        <path d="M12 7.5V12l3 1.8" />
-      </svg>
-    ),
-  },
-  {
-    label: "Online · free to attend",
-    icon: (
-      <svg {...iconProps}>
-        <rect x="2.5" y="6" width="13" height="12" rx="3" />
-        <path d="m15.5 10.5 6-3v9l-6-3z" />
-      </svg>
-    ),
-  },
-];
+const ICONS = {
+  date: (
+    <svg {...iconProps}>
+      <rect x="3.5" y="5" width="17" height="15.5" rx="3" />
+      <path d="M3.5 9.5h17M8 3.5v3M16 3.5v3" />
+    </svg>
+  ),
+  time: (
+    <svg {...iconProps}>
+      <circle cx="12" cy="12" r="8.5" />
+      <path d="M12 7.5V12l3 1.8" />
+    </svg>
+  ),
+  mode: (
+    <svg {...iconProps}>
+      <rect x="2.5" y="6" width="13" height="12" rx="3" />
+      <path d="m15.5 10.5 6-3v9l-6-3z" />
+    </svg>
+  ),
+};
 
 /** Classic "live" indicator: a static core with an expanding ring behind it. */
 export function LivePulse({ className = "" }: { className?: string }) {
@@ -83,8 +91,45 @@ export function LivePulse({ className = "" }: { className?: string }) {
 }
 
 export default function LiveClass() {
+  const [session, setSession] = useState<Session>(FALLBACK);
+
+  useEffect(() => {
+    // AbortController so a navigation mid-flight doesn't set state on an
+    // unmounted component.
+    const controller = new AbortController();
+
+    fetch(LIVE_CLASS_ENDPOINT, { signal: controller.signal })
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!data) return;
+        // enabled === null means the endpoint is reachable but has no usable
+        // row, so keep the built-in values rather than blanking the section.
+        if (data.enabled === null) return;
+        if (data.enabled === false) {
+          setSession((s) => ({ ...s, enabled: false }));
+          return;
+        }
+        setSession({ ...FALLBACK, ...data });
+      })
+      .catch(() => {
+        // Offline, 404, or the backend isn't deployed yet — the fallback is
+        // already on screen, so there is nothing to do.
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  const details = [
+    { label: session.dateText, icon: ICONS.date },
+    { label: session.timeText, icon: ICONS.time },
+    { label: session.modeText, icon: ICONS.mode },
+  ];
+
   return (
-    <section id="live" className="relative z-10 mx-auto max-w-[1300px] px-12 pb-28">
+    <section
+      id="live"
+      className="relative z-10 mx-auto max-w-[1300px] px-5 pb-20 sm:px-8 sm:pb-28 lg:px-12"
+    >
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -115,81 +160,104 @@ export default function LiveClass() {
           className="absolute -top-8 left-1/2 h-40 w-[70%] -translate-x-1/2 rounded-full bg-teal/10 blur-[80px]"
         />
 
-        {/* Teal-bordered rather than the usual hairline: this is the one
-            time-sensitive block on the page, so it reads as an alert without
-            resorting to a second primary button colour. */}
-        <div className="relative grid grid-cols-1 gap-10 rounded-3xl border border-teal/20 bg-teal/[0.03] p-8 backdrop-blur-sm md:grid-cols-[auto_1fr_auto] md:items-center md:gap-12 md:p-10">
-          {/* ------------------------------------------------ calendar tile -- */}
-          <div className="flex w-[104px] shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-surface-2 text-center">
-            <span className="bg-teal/15 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-teal">
-              {UPCOMING.month}
-            </span>
-            <span className="py-3 font-display text-[38px] font-bold leading-none tracking-tight">
-              {UPCOMING.day}
-            </span>
-          </div>
-
-          {/* ------------------------------------------------------ details -- */}
-          <div>
+        {session.enabled === false ? (
+          /* Nothing scheduled. The section stays on the page so the nav anchor
+             and the Live Classes pill still lead somewhere, and it points at the
+             channel rather than showing a stale date. */
+          <div className="relative rounded-3xl border border-teal/20 bg-teal/[0.03] p-6 text-center backdrop-blur-sm sm:p-10">
             <span className="inline-flex items-center gap-2.5 rounded-full border border-lime/30 bg-lime/[0.07] px-3.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.11em] text-lime">
               <LivePulse />
-              Upcoming live class
+              Next session TBA
             </span>
-
-            <h3 className="mt-4 max-w-[560px] font-display text-[clamp(21px,2.3vw,28px)] font-bold leading-[1.2] tracking-tight">
-              {UPCOMING.topic}
+            <h3 className="mx-auto mt-4 max-w-[520px] font-display text-[clamp(20px,2.2vw,26px)] font-bold leading-[1.2] tracking-tight">
+              Dates for the next live class are announced on the WhatsApp channel.
             </h3>
-
-            <p className="mt-3 max-w-[560px] text-[15px] leading-relaxed text-muted">
-              {UPCOMING.blurb}
-            </p>
-
-            <ul className="mt-6 flex flex-wrap gap-x-7 gap-y-3 list-none">
-              {DETAILS.map((d) => (
-                <li key={d.label} className="flex items-center gap-2.5 text-[14px] text-muted">
-                  <span className="text-teal">{d.icon}</span>
-                  {d.label}
-                </li>
-              ))}
-            </ul>
-
-            <ul className="mt-6 list-none space-y-2.5">
-              {UPCOMING.highlights.map((h) => (
-                <li key={h} className="flex items-start gap-3 text-[14.5px]">
-                  <span
-                    aria-hidden
-                    className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-teal"
-                  />
-                  {h}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* ----------------------------------------------------- register -- */}
-          <div className="flex flex-col items-stretch gap-3 md:w-[210px]">
             <a
-              href={LIVE_CLASS_REGISTER_URL}
+              href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
+              className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
-              Register free
-              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-                <path
-                  d="M5 12h14M13 6l6 6-6 6"
-                  stroke="#fff"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              Get notified
             </a>
-            <p className="text-center font-mono text-[10px] uppercase tracking-[0.09em] text-muted">
-              No payment required
-            </p>
           </div>
-        </div>
+        ) : (
+          <div className="relative grid grid-cols-1 gap-10 rounded-3xl border border-teal/20 bg-teal/[0.03] p-6 backdrop-blur-sm sm:p-8 md:grid-cols-[auto_1fr_auto] md:items-center md:gap-12 md:p-10">
+            <div className="flex w-[104px] shrink-0 flex-col overflow-hidden rounded-2xl border border-line bg-surface-2 text-center">
+              <span className="bg-teal/15 py-2 font-mono text-[11px] uppercase tracking-[0.12em] text-teal">
+                {session.month}
+              </span>
+              <span className="py-3 font-display text-[38px] font-bold leading-none tracking-tight">
+                {session.day}
+              </span>
+            </div>
+
+            <div>
+              <span className="inline-flex items-center gap-2.5 rounded-full border border-lime/30 bg-lime/[0.07] px-3.5 py-1.5 font-mono text-[10.5px] uppercase tracking-[0.11em] text-lime">
+                <LivePulse />
+                Upcoming live class
+              </span>
+
+              <h3 className="mt-4 max-w-[560px] font-display text-[clamp(21px,2.3vw,28px)] font-bold leading-[1.2] tracking-tight">
+                {session.topic}
+              </h3>
+
+              {session.blurb && (
+                <p className="mt-3 max-w-[560px] text-[15px] leading-relaxed text-muted">
+                  {session.blurb}
+                </p>
+              )}
+
+              <ul className="mt-6 flex list-none flex-wrap gap-x-7 gap-y-3">
+                {details.map((d) => (
+                  <li key={d.label} className="flex items-center gap-2.5 text-[14px] text-muted">
+                    <span className="text-teal">{d.icon}</span>
+                    {d.label}
+                  </li>
+                ))}
+              </ul>
+
+              {session.highlights.length > 0 && (
+                <ul className="mt-6 list-none space-y-2.5">
+                  {session.highlights.map((h) => (
+                    <li key={h} className="flex items-start gap-3 text-[14.5px]">
+                      <span
+                        aria-hidden
+                        className="mt-[9px] h-1.5 w-1.5 shrink-0 rounded-full bg-teal"
+                      />
+                      {h}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div className="flex flex-col items-stretch gap-3 md:w-[210px]">
+              <a
+                href={session.registerUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
+              >
+                Register free
+                <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+                  <path
+                    d="M5 12h14M13 6l6 6-6 6"
+                    stroke="#fff"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </a>
+              {session.registerNote && (
+                <p className="text-center font-mono text-[10px] uppercase tracking-[0.09em] text-muted">
+                  {session.registerNote}
+                </p>
+              )}
+            </div>
+          </div>
+        )}
       </motion.div>
     </section>
   );

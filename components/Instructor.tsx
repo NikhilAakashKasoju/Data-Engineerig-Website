@@ -3,9 +3,14 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
+import { asset } from "@/lib/site";
 
-/** Served from public/instructor.png — paths in /public resolve from the site root. */
-const PORTRAIT = "/instructor.png";
+/**
+ * Served from public/instructor.png. Wrapped in asset() because next/image does
+ * not apply basePath to public-folder paths — without it this 404s on a
+ * subfolder deploy.
+ */
+const PORTRAIT = asset("/instructor.png");
 
 const STATS = [
   ["15+", "Years experience"],
@@ -33,15 +38,15 @@ const SOCIALS = [
     path: "M12 2.5a9.5 9.5 0 1 0 0 19 9.5 9.5 0 0 0 0-19Zm6.9 8.6h-3.05a14.7 14.7 0 0 0-1.36-5.52 7.53 7.53 0 0 1 4.41 5.52ZM12 4.6c.83 1.2 1.6 3.4 1.75 6.5h-3.5C10.4 8 11.17 5.8 12 4.6ZM4.6 12.9h3.05a14.7 14.7 0 0 0 1.36 5.52A7.53 7.53 0 0 1 4.6 12.9Zm3.05-1.8H4.6a7.53 7.53 0 0 1 4.41-5.52A14.7 14.7 0 0 0 7.65 11.1ZM12 19.4c-.83-1.2-1.6-3.4-1.75-6.5h3.5c-.15 3.1-.92 5.3-1.75 6.5Zm2.49-.98a14.7 14.7 0 0 0 1.36-5.52h3.05a7.53 7.53 0 0 1-4.41 5.52Z",
   },
   {
-    label: "WhatsApp 9567034641",
-    href: "https://wa.me/919567034641",
+    label: "WhatsApp channel",
+    href: "https://whatsapp.com/channel/0029Val125n2UPBNAPAprU1G",
     path: "M12 2.7a9.2 9.2 0 0 0-7.9 13.9L2.7 21.3l4.9-1.3A9.2 9.2 0 1 0 12 2.7Zm0 16.7a7.5 7.5 0 0 1-3.8-1l-.27-.16-2.9.76.77-2.83-.18-.29A7.5 7.5 0 1 1 12 19.4Zm4.2-5.5c-.23-.12-1.36-.67-1.57-.74s-.36-.12-.52.11-.6.74-.73.9-.27.17-.5.06a6.1 6.1 0 0 1-1.8-1.11 6.8 6.8 0 0 1-1.25-1.56c-.13-.23 0-.35.1-.46l.35-.4a1.6 1.6 0 0 0 .23-.39.42.42 0 0 0 0-.4c0-.11-.52-1.25-.71-1.71s-.38-.39-.52-.4h-.44a.85.85 0 0 0-.62.29 2.59 2.59 0 0 0-.8 1.92 4.48 4.48 0 0 0 .94 2.39 10.3 10.3 0 0 0 3.95 3.48 4.53 4.53 0 0 0 2.78.58 2.36 2.36 0 0 0 1.55-1.1 1.92 1.92 0 0 0 .13-1.09c-.05-.1-.2-.16-.43-.27Z",
   },
 ];
 
 export default function Instructor() {
   return (
-    <section id="instructor" className="relative z-10 mx-auto max-w-[1300px] px-12 py-28">
+    <section id="instructor" className="relative z-10 mx-auto max-w-[1300px] px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
       <div className="grid grid-cols-1 items-center gap-14 md:grid-cols-[minmax(0,0.85fr)_minmax(0,1fr)] md:gap-20">
         {/* -------------------------------------------------------- portrait -- */}
         <motion.div
@@ -63,7 +68,6 @@ export default function Instructor() {
               src={PORTRAIT}
               alt="Atchyut Kumar, lead instructor"
               fill
-              priority
               sizes="(min-width: 768px) 40vw, 100vw"
               className="object-cover object-top"
             />

@@ -18,7 +18,7 @@ export default function Hero() {
   return (
     <motion.section
       id="hero"
-      className="relative z-10 mx-auto max-w-[1300px] px-12 pb-16 pt-20"
+      className="relative z-10 mx-auto max-w-[1300px] px-5 pb-16 pt-10 sm:px-8 sm:pt-16 lg:px-12 lg:pt-20"
       variants={stagger}
       initial="hidden"
       animate="show"
@@ -62,7 +62,17 @@ export default function Hero() {
             lakehouse — guided by Atchyut Kumar.
           </motion.p>
 
-          <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-4">
+          {/*
+            Stacked full-width on phones, inline from sm up.
+            `flex-wrap` alone wasn't enough: each button is whitespace-nowrap, so
+            "Enroll in UDEMY course" is wider than a 375px viewport minus the
+            section padding — it would wrap to its own row and still be clipped.
+            Going column-first guarantees every label is fully readable.
+          */}
+          <motion.div
+            variants={fadeUp}
+            className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center"
+          >
             {/* Hands off to the Udemy checkout. rel="noopener noreferrer" is
                 required alongside target="_blank" — without it the opened page
                 gets a window.opener handle back to this one and can navigate it
@@ -71,10 +81,25 @@ export default function Hero() {
               href={ENROLL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary inline-flex items-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-[26px] py-4 text-[15px] font-semibold text-white"
+              className="btn-primary inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-5 py-3 text-[14px] font-semibold text-white sm:py-2.5"
             >
-              Enroll in the Course
-              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
+              Enroll in UDEMY course
+              <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5">
+                <path
+                  d="M5 12h14M13 6l6 6-6 6"
+                  stroke="#fff"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </a>
+            <a
+              href="#course"
+              className="btn-primary inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-5 py-3 text-[14px] font-semibold text-white sm:py-2.5"
+            >
+              Enroll in the program
+              <svg viewBox="0 0 24 24" fill="none" className="h-3.5 w-3.5">
                 <path
                   d="M5 12h14M13 6l6 6-6 6"
                   stroke="#fff"
@@ -86,7 +111,7 @@ export default function Hero() {
             </a>
             <a
               href="#curriculum"
-              className="rounded-full border border-line bg-surface px-6 py-4 text-[15px] font-semibold transition-colors hover:border-line-strong hover:bg-surface-2"
+              className="inline-flex items-center justify-center whitespace-nowrap rounded-full border border-line bg-surface px-5 py-3 text-[14px] font-semibold transition-colors hover:border-line-strong hover:bg-surface-2 sm:py-2.5"
             >
               What you&apos;ll learn
             </a>

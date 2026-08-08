@@ -180,7 +180,7 @@ function Copy({ item }: { item: ModuleItem }) {
 
 export default function Curriculum() {
   return (
-    <section id="curriculum" className="relative z-10 mx-auto max-w-[1300px] px-12 py-28">
+    <section id="curriculum" className="relative z-10 mx-auto max-w-[1300px] px-5 py-20 sm:px-8 sm:py-28 lg:px-12">
       <motion.div
         variants={fadeUp}
         initial="hidden"

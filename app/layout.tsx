@@ -43,10 +43,16 @@ const DESCRIPTION =
   "An industry-standard, project-driven curriculum: 33 modules across 13 phases covering SQL, Azure Data Factory, Databricks, PySpark and Delta Lake, ending in a full retail lakehouse build. Think. Learn. Evolve.";
 
 export const metadata: Metadata = {
-  // TODO: set to the real production origin before deploying. Without
-  // metadataBase, Next resolves relative OG image URLs against localhost and
-  // link previews silently break in production.
-  metadataBase: new URL("https://dataforge.example.com"),
+  /**
+   * Relative URLs in the metadata below resolve against this. The trailing
+   * slash matters: without it, "opengraph-image.png" would resolve to
+   * /opengraph-image.png at the domain root — the client's PHP site — instead
+   * of inside /azure/.
+   */
+  metadataBase: new URL("https://edufulness.com/azure/"),
+  // Tells search engines which URL is authoritative, so /azure and /azure/
+  // aren't indexed as two separate pages.
+  alternates: { canonical: "/" },
   title: TITLE,
   description: DESCRIPTION,
   openGraph: {
