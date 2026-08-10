@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
-import { ENROLL_URL } from "@/lib/site";
+import { ENROLL_URL, PROGRAM_CHECKOUT_URL } from "@/lib/site";
 import HeroViz from "./HeroViz";
 
 // Every figure here is off the curriculum PDF cover page. The previous values
@@ -94,8 +94,13 @@ export default function Hero() {
                 />
               </svg>
             </a>
+            {/* Goes straight to checkout on the learning platform rather than
+                scrolling to the pricing panel — this is the real enrolment
+                path for the masterclass. */}
             <a
-              href="#course"
+              href={PROGRAM_CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-5 py-3 text-[14px] font-semibold text-white sm:py-2.5"
             >
               Enroll in the program

@@ -6,8 +6,16 @@
  * into three components. Update it here and every button follows.
  */
 
+/**
+ * Udemy listing — a separate, cheaper course, not this programme. Kept as the
+ * secondary CTA.
+ */
 export const ENROLL_URL =
   "https://www.udemy.com/course/azure-data-factory-data-engineer-real-time-projects/?couponCode=EFNJUL26BEST";
+
+/** Checkout for the masterclass itself, on the EduFulness learning platform. */
+export const PROGRAM_CHECKOUT_URL =
+  "https://learn.edufulness.com/web/checkout/69b5893af737ca4075436369";
 
 /** Broadcast channel (join link), not a direct chat — the copy says "join". */
 export const WHATSAPP_URL = "https://whatsapp.com/channel/0029Val125n2UPBNAPAprU1G";
