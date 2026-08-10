@@ -10,7 +10,7 @@ import { asset } from "@/lib/site";
  * not apply basePath to public-folder paths — without it this 404s on a
  * subfolder deploy.
  */
-const PORTRAIT = asset("/instructor.png");
+const PORTRAIT = asset("/instructor.jpg");
 
 const STATS = [
   ["15+", "Years experience"],

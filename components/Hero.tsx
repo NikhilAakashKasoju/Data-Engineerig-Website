@@ -4,14 +4,18 @@ import { motion } from "framer-motion";
 import { fadeUp, stagger } from "@/lib/motion";
 import { ENROLL_URL, PROGRAM_CHECKOUT_URL } from "@/lib/site";
 import HeroViz from "./HeroViz";
+import CountUp from "./CountUp";
 
 // Every figure here is off the curriculum PDF cover page. The previous values
 // (12 weeks, 40+ labs, self-paced) were invented before the document existed —
 // and "self-paced" actively contradicted it, since this runs as a weekend batch.
+//
+// Numbers are stored as numbers, not strings, so CountUp can animate them; any
+// trailing symbol goes in `suffix` and stays put while the digits climb.
 const STATS = [
-  ["33", "Modules"],
-  ["13", "Phases"],
-  ["1", "Capstone Project"],
+  { value: 33, suffix: "", label: "Modules" },
+  { value: 13, suffix: "", label: "Phases" },
+  { value: 1, suffix: "", label: "Capstone Project" },
 ] as const;
 
 export default function Hero() {
@@ -123,13 +127,18 @@ export default function Hero() {
           </motion.div>
 
           <motion.dl variants={fadeUp} className="mt-14 flex flex-wrap gap-x-14 gap-y-6">
-            {STATS.map(([value, label]) => (
-              <div key={label}>
-                <dt className="sr-only">{label}</dt>
+            {STATS.map((stat) => (
+              <div key={stat.label}>
+                <dt className="sr-only">{stat.label}</dt>
                 <dd>
-                  <b className="block font-display text-3xl font-bold">{value}</b>
+                  {/* tabular-nums keeps every digit the same width, so the
+                      label underneath doesn't jitter sideways as the count
+                      passes 9 → 10. */}
+                  <b className="block font-display text-3xl font-bold tabular-nums">
+                    <CountUp value={stat.value} suffix={stat.suffix} />
+                  </b>
                   <span className="mt-1 block font-mono text-[11.5px] uppercase tracking-[0.08em] text-muted">
-                    {label}
+                    {stat.label}
                   </span>
                 </dd>
               </div>

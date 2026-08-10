@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { fadeUp } from "@/lib/motion";
-import { ENROLL_URL, WHATSAPP_URL } from "@/lib/site";
+import { ENROLL_URL, PROGRAM_CHECKOUT_URL, WHATSAPP_URL } from "@/lib/site";
 
 const iconProps = {
   viewBox: "0 0 24 24",
@@ -131,14 +131,20 @@ export default function Pricing() {
               </span>
             </p>
 
+            {/* One filled button, two outlined. Three gradient pills in a
+                narrow column meant nothing read as the primary action — and the
+                primary action here is enrolling in this programme, not the
+                separate Udemy course. */}
             <a
-              href="#contact"
+              href={PROGRAM_CHECKOUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
             >
-              Request the syllabus
+              Enroll in the program
               <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
                 <path
-                  d="M5 12h14M13 6l6 6-6 6"
+                  d="M7 17 17 7M9 7h8v8"
                   stroke="#fff"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -148,29 +154,28 @@ export default function Pricing() {
             </a>
 
             <a
-              href={WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 block text-center font-mono text-[10.5px] uppercase tracking-[0.09em] text-muted transition-colors hover:text-text"
+              href="#contact"
+              className="mt-3 inline-flex items-center justify-center gap-2.5 rounded-full border border-line bg-surface px-7 py-3.5 text-[14.5px] font-semibold transition-colors hover:border-line-strong hover:bg-surface-2"
             >
-              Join WhatsApp channel for updates
+              Request the syllabus
             </a>
+
             <a
               href={ENROLL_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary mt-7 inline-flex items-center justify-center gap-2.5 rounded-full bg-gradient-to-br from-purple to-[#2f74f0] px-7 py-4 text-[15px] font-semibold text-white transition-transform hover:-translate-y-0.5"
+              className="mt-3 inline-flex items-center justify-center gap-2 rounded-full border border-line bg-surface px-7 py-3.5 text-[14.5px] font-semibold transition-colors hover:border-line-strong hover:bg-surface-2"
             >
-              Enroll Now in UDEMY
-              <svg viewBox="0 0 24 24" fill="none" className="h-4 w-4">
-                <path
-                  d="M5 12h14M13 6l6 6-6 6"
-                  stroke="#fff"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              Enroll in the Udemy course
+            </a>
+
+            <a
+              href={WHATSAPP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 block text-center font-mono text-[10.5px] uppercase tracking-[0.09em] text-muted transition-colors hover:text-text"
+            >
+              Join WhatsApp channel for updates
             </a>
           </div>
         </div>
