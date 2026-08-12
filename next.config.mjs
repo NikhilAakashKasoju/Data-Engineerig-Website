@@ -5,7 +5,7 @@
  * Set to "/folder" (leading slash, no trailing slash) for a subfolder deploy —
  * it must match the folder name in public_html exactly.
  */
-const basePath = "/azure";
+const basePath = "/data-engineering";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {

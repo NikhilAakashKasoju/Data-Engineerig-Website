@@ -14,7 +14,7 @@ const PORTRAIT = asset("/instructor.jpg");
 
 const STATS = [
   ["15+", "Years experience"],
-  ["50k+", "Students mentored"],
+  ["110k+", "Students mentored"],
   ["99.97", "GATE percentile"],
 ] as const;
 
