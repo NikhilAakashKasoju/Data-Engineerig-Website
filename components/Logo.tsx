@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { asset } from "@/lib/site";
+import { asset, WEBSITE_URL } from "@/lib/site";
 
 /**
  * Shared wordmark, used by the nav and the footer.
@@ -11,18 +11,22 @@ import { asset } from "@/lib/site";
  * in CSS. Overriding only one axis with a Tailwind class makes next/image warn
  * about a distorted aspect ratio in dev.
  *
- * Links to #hero — the "logo goes home" convention on a single-page site, and
- * it doubles as back-to-top in the footer. A real <a> so it works without JS
- * and is keyboard-focusable for free.
+ * Links to edufulness.com, not to #hero. This page is one course in a family of
+ * course sites, so the brand mark belongs to the parent — clicking it should go
+ * to the main site, which is what visitors expect a logo to do. Back-to-top is
+ * handled by the nav links instead.
+ *
+ * Same tab, deliberately: it's the same organisation, not an external site, so
+ * a new tab would be unexpected.
  */
 export default function Logo({ className = "" }: { className?: string }) {
   return (
     <a
-      href="#hero"
-      // Includes the strapline so screen readers get the same information
-      // sighted users do — an aria-label replaces ALL inner content, so without
-      // this the visible text would simply never be announced.
-      aria-label="EduFulness — Azure Data Engineering Course, back to top"
+      href={WEBSITE_URL}
+      // An aria-label replaces ALL inner content for screen readers, so the
+      // strapline has to be repeated here or it is never announced. Naming the
+      // destination matters more than usual, since the link leaves the page.
+      aria-label="EduFulness — Azure Data Engineering Course. Go to edufulness.com"
       className={`inline-flex min-w-0 shrink items-center gap-2.5 rounded-lg transition-opacity hover:opacity-80 ${className}`}
     >
       <Image
@@ -38,7 +42,13 @@ export default function Logo({ className = "" }: { className?: string }) {
         Classes pill and the Enroll button overflow anything narrower than a
         laptop, and the nav is the one row on the page that cannot wrap.
       */}
-      <span className="hidden whitespace-nowrap border-l border-line pl-2.5 text-[13px] font-medium leading-tight text-muted xl:inline">
+      {/* A literal slash rather than a border-left, echoing the "/ Section
+          name" eyebrow used throughout the page. Dimmer than the label so it
+          reads as a separator, not a character in the text. */}
+      <span className="hidden whitespace-nowrap text-[13px] font-medium leading-tight text-muted xl:inline">
+        <span aria-hidden className="mr-2 text-muted/50">
+          /
+        </span>
         Azure Data Engineering Course
       </span>
     </a>

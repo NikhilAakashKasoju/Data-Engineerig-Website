@@ -43,6 +43,86 @@ function db(): PDO
     return $pdo;
 }
 
+/* ------------------------------------------------------------ courses -- */
+
+/**
+ * The registry is the contract between the backend and every course site.
+ * A site sends its slug; everything else is looked up from here. Adding a
+ * course is a row in this table — no schema change, no PHP deploy.
+ */
+
+/** @return array<int,array<string,mixed>> */
+function all_courses(bool $activeOnly = false): array
+{
+    // Cached per request: the admin pages hit this several times while
+    // rendering a switcher, a filter and a table.
+    static $cache = [];
+    $key = $activeOnly ? 'active' : 'all';
+
+    if (isset($cache[$key])) {
+        return $cache[$key];
+    }
+
+    $sql = 'SELECT * FROM courses';
+    if ($activeOnly) {
+        $sql .= ' WHERE active = 1';
+    }
+    $sql .= ' ORDER BY name';
+
+    return $cache[$key] = db()->query($sql)->fetchAll();
+}
+
+/** @return array<string,mixed>|null */
+function course_by_slug(string $slug): ?array
+{
+    // Cheap reject before touching the database — the slug arrives from a
+    // public endpoint.
+    if (!preg_match('/^[a-z0-9-]{1,60}$/', $slug)) {
+        return null;
+    }
+
+    $stmt = db()->prepare('SELECT * FROM courses WHERE slug = ? LIMIT 1');
+    $stmt->execute([$slug]);
+
+    return $stmt->fetch() ?: null;
+}
+
+/** @return array<string,mixed>|null */
+function course_by_id(int $id): ?array
+{
+    $stmt = db()->prepare('SELECT * FROM courses WHERE id = ? LIMIT 1');
+    $stmt->execute([$id]);
+
+    return $stmt->fetch() ?: null;
+}
+
+/**
+ * Which course the admin is currently looking at. Persisted in the session so
+ * the choice survives navigating between the leads list and the live-class
+ * editor. `?course=` on the query string switches it; 0 means "all courses",
+ * which only the leads list supports.
+ */
+function admin_course_id(): int
+{
+    start_session();
+
+    if (isset($_GET['course'])) {
+        $id = (int) $_GET['course'];
+        // 0 is a valid selection (All), any other value must be a real course.
+        if ($id === 0 || course_by_id($id)) {
+            $_SESSION['course_id'] = $id;
+        }
+    }
+
+    if (isset($_SESSION['course_id'])) {
+        return (int) $_SESSION['course_id'];
+    }
+
+    // First visit: land on the first course rather than an empty state.
+    $courses = all_courses();
+    return $courses ? (int) $courses[0]['id'] : 0;
+}
+
 /* ------------------------------------------------------------ helpers -- */
 
 function json_out(array $data, int $code = 200): never

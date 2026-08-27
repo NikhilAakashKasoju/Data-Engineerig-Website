@@ -1,6 +1,8 @@
 <?php
 /**
- * Public read endpoint for the Live Classes section.
+ * Public read endpoint for a course's Live Classes section.
+ *
+ *   GET live-class.php?course=data-engineering
  *
  * Returns pre-formatted strings rather than raw values, so the browser does no
  * date maths. Formatting on the server means one implementation, and no risk of
@@ -21,7 +23,10 @@ header('Cache-Control: public, max-age=60');
 
 if (!empty($CONFIG['allowed_origin'])) {
     $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-    if (hash_equals((string) $CONFIG['allowed_origin'], $origin)) {
+    // allowed_origin may be a single string or a list, since several course
+    // sites can share this backend.
+    $allowed = (array) $CONFIG['allowed_origin'];
+    if (in_array($origin, $allowed, true)) {
         header('Access-Control-Allow-Origin: ' . $origin);
         header('Vary: Origin');
     }
@@ -32,18 +37,41 @@ if (($_SERVER['REQUEST_METHOD'] ?? '') === 'OPTIONS') {
     exit;
 }
 
-try {
-    $row = db()->query('SELECT * FROM live_class WHERE id = 1')->fetch();
-} catch (Throwable $err) {
-    error_log('[live-class] read failed: ' . $err->getMessage());
-    // 200 with enabled:null so the front end quietly keeps its built-in values
-    // instead of showing an error to a visitor about a CMS they don't know about.
+/**
+ * Every failure below returns 200 with enabled:null.
+ *
+ * The consumer is a marketing page that already has real content baked in and
+ * only *replaces* it on a successful response. Returning an error status would
+ * make the browser log a console error about a CMS the visitor doesn't know
+ * exists, for no benefit — the page looks identical either way.
+ */
+$fallback = static function (): never {
     echo json_encode(['enabled' => null]);
     exit;
+};
+
+$slug = trim((string) ($_GET['course'] ?? ''));
+
+try {
+    $course = course_by_slug($slug);
+    if (!$course) {
+        error_log('[live-class] unknown course slug: ' . $slug);
+        $fallback();
+    }
+
+    $stmt = db()->prepare('SELECT * FROM live_class WHERE course_id = ? LIMIT 1');
+    $stmt->execute([$course['id']]);
+    $row = $stmt->fetch();
+} catch (Throwable $err) {
+    error_log('[live-class] read failed: ' . $err->getMessage());
+    $fallback();
 }
 
+// A course with no row yet is normal — a new site can go live before anyone
+// has configured its live class. Treated as "nothing scheduled" rather than an
+// error, so the section shows its TBA state.
 if (!$row) {
-    echo json_encode(['enabled' => null]);
+    echo json_encode(['enabled' => false]);
     exit;
 }
 

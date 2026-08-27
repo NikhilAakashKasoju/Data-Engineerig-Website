@@ -47,7 +47,9 @@ if (!is_array($body)) {
 $name    = trim((string) ($body['name'] ?? ''));
 $email   = trim((string) ($body['email'] ?? ''));
 $message = trim((string) ($body['message'] ?? ''));
-$source  = trim((string) ($body['source'] ?? 'azure'));
+// `course` is the slug from the posting site's config. `source` is the old
+// field name, accepted so an un-redeployed site keeps working.
+$slug    = trim((string) ($body['course'] ?? $body['source'] ?? ''));
 $hp      = trim((string) ($body['company'] ?? ''));      // honeypot
 $started = (int) ($body['started'] ?? 0);                 // ms timestamp
 
@@ -86,22 +88,40 @@ if (mb_strlen($message) > 2000) {
     json_out(['ok' => false, 'error' => 'That message is too long.'], 400);
 }
 
-if (!preg_match('/^[a-z0-9_-]{1,60}$/', $source)) {
-    $source = 'azure';
+/**
+ * The course must exist in the registry and be active.
+ *
+ * Previously this was a regex, so a typo in a site's config silently created a
+ * phantom source and the leads were effectively lost. Validating against the
+ * registry makes a misconfigured site fail loudly at the first submission
+ * instead of quietly for weeks.
+ */
+$course = course_by_slug($slug);
+
+if (!$course) {
+    error_log('[contact] unknown course slug: ' . $slug);
+    json_out(['ok' => false, 'error' => 'This form is not configured correctly.'], 400);
+}
+
+if (!(int) $course['active']) {
+    json_out(['ok' => false, 'error' => 'This course is no longer accepting enquiries.'], 410);
 }
 
 /* ----------------------------------------------------------- store -- */
 
 try {
     $stmt = db()->prepare(
-        'INSERT INTO leads (name, email, message, source, ip, user_agent)
-         VALUES (?, ?, ?, ?, ?, ?)'
+        'INSERT INTO leads (name, email, message, course_id, source, ip, user_agent)
+         VALUES (?, ?, ?, ?, ?, ?, ?)'
     );
     $stmt->execute([
         $name,
         $email,
         $message !== '' ? $message : null,
-        $source,
+        $course['id'],
+        // Denormalised copy, kept while `source` still exists on the table.
+        // Drop this argument and the column together.
+        $course['slug'],
         client_ip(),
         mb_substr((string) ($_SERVER['HTTP_USER_AGENT'] ?? ''), 0, 255),
     ]);
@@ -114,10 +134,12 @@ try {
 
 /* ------------------------------------------------------------ ping -- */
 
-$subject = sprintf('New lead: %s (%s)', $name, $source);
+// Course name, not slug — with several sites feeding one inbox, the subject
+// line is how you tell at a glance which course an enquiry is for.
+$subject = sprintf('New lead: %s — %s', $course['name'], $name);
 
 $lines = [
-    'A new enquiry came in from the ' . $source . ' page.',
+    'A new enquiry came in from the ' . $course['name'] . ' page.',
     '',
     'Name:    ' . $name,
     'Email:   ' . $email,
