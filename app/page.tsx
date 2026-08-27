@@ -7,6 +7,7 @@ import Resources from "@/components/Resources";
 import LiveClass from "@/components/LiveClass";
 import Pricing from "@/components/Pricing";
 import Instructor from "@/components/Instructor";
+import Testimonials from "@/components/Testimonials";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -22,7 +23,11 @@ export default function Home() {
         <Resources />
         <LiveClass />
         <Pricing />
+        {/* Instructor then Testimonials reads as one credibility block — who
+            teaches it, then what students thought — landing immediately before
+            the contact form. */}
         <Instructor />
+        <Testimonials />
         <Contact />
       </main>
       <Footer />

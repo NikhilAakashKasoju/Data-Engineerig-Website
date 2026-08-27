@@ -21,7 +21,11 @@ export default function NavLinks({ links }: { links: Link[] }) {
 
   return (
     <>
-      <ul className="hidden list-none gap-5 text-[14.5px] text-muted lg:flex xl:gap-7">
+      {/* Seven links now. gap-4 and 14px at lg keeps the row inside a 1024px
+          viewport alongside the logo, admin icon and Enroll button; both relax
+          again at xl where there's room. Adding an eighth link will overflow —
+          check at exactly 1024px if you do. */}
+      <ul className="hidden list-none gap-4 text-[14px] text-muted lg:flex xl:gap-6 xl:text-[14.5px]">
         {links.map((item) => {
           const isActive = active === item.href.replace("#", "");
           return (

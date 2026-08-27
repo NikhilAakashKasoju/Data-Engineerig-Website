@@ -11,6 +11,7 @@ const COLUMNS = [
       { label: "Live classes", href: "#live" },
       { label: "Enroll", href: "#course" },
       { label: "Instructor", href: "#instructor" },
+      { label: "Reviews", href: "#reviews" },
     ],
   },
   {
