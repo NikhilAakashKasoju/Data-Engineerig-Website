@@ -11,8 +11,19 @@ type Link = { label: string; href: string };
  * Owns both the section links and the Live Classes pill, because both need the
  * active state — keeping them together means Nav itself stays a server
  * component and the observer is set up once, not twice.
+ *
+ * `courses` is a slot rendered between the two. The Courses menu belongs
+ * visually between the section links and the Live pill, but it has no business
+ * knowing about scroll-spy, so it's injected as a node from Nav rather than
+ * imported here — that keeps this file's only concern the active section.
  */
-export default function NavLinks({ links }: { links: Link[] }) {
+export default function NavLinks({
+  links,
+  courses,
+}: {
+  links: Link[];
+  courses?: React.ReactNode;
+}) {
   const ids = links.map((l) => l.href.replace("#", ""));
 
   // "live" is observed too so the pill highlights alongside the text links,
@@ -21,11 +32,12 @@ export default function NavLinks({ links }: { links: Link[] }) {
 
   return (
     <>
-      {/* Seven links now. gap-4 and 14px at lg keeps the row inside a 1024px
-          viewport alongside the logo, admin icon and Enroll button; both relax
-          again at xl where there's room. Adding an eighth link will overflow —
-          check at exactly 1024px if you do. */}
-      <ul className="hidden list-none gap-4 text-[14px] text-muted lg:flex xl:gap-6 xl:text-[14.5px]">
+      {/*
+        Padding sits on every item, not just the active one, so the row does not
+        shift as the highlight moves between links. Seven links plus padding is
+        wide, hence the tight px and gap at lg — both relax at xl.
+      */}
+      <ul className="hidden list-none items-center gap-0.5 text-[13.5px] text-muted lg:flex xl:gap-1 xl:text-[14px]">
         {links.map((item) => {
           const isActive = active === item.href.replace("#", "");
           return (
@@ -35,29 +47,25 @@ export default function NavLinks({ links }: { links: Link[] }) {
                 // aria-current is what tells assistive tech which item is
                 // current; colour alone communicates nothing to a screen reader.
                 aria-current={isActive ? "true" : undefined}
-                className={`relative transition-colors hover:text-text ${
-                  isActive ? "text-text" : ""
+                className={`inline-block rounded-full px-2.5 py-1.5 transition-colors xl:px-3 ${
+                  isActive
+                    ? "bg-surface-2 text-text"
+                    : "hover:bg-surface hover:text-text"
                 }`}
               >
                 {item.label}
-                {/* Always rendered and faded rather than mounted on demand, so
-                    the underline can transition instead of popping. */}
-                <span
-                  aria-hidden
-                  className={`absolute -bottom-1.5 left-0 h-[2px] w-full rounded-full bg-purple-2 transition-opacity duration-200 ${
-                    isActive ? "opacity-100" : "opacity-0"
-                  }`}
-                />
               </a>
             </li>
           );
         })}
       </ul>
 
+      {courses}
+
       <a
         href="#live"
         aria-current={active === "live" ? "true" : undefined}
-        className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-3 py-2.5 text-[13px] font-medium text-text transition-colors sm:gap-2.5 sm:px-4 sm:py-2 sm:text-[13.5px] ${
+        className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-3 py-2 text-[13px] font-medium text-text transition-colors sm:gap-2.5 sm:px-3.5 sm:text-[13.5px] ${
           active === "live"
             ? "border-teal/70 bg-teal/[0.16]"
             : "border-teal/35 bg-teal/[0.07] hover:border-teal/60 hover:bg-teal/[0.12]"

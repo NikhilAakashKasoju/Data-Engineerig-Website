@@ -80,6 +80,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrains.variable} font-body bg-bg text-text overflow-x-hidden`}
       >
+        {/* First focusable element on the page. Invisible until tabbed to, then
+            it lets a keyboard or screen-reader user jump the whole nav instead
+            of tabbing through every link on every visit. */}
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-purple focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white"
+        >
+          Skip to content
+        </a>
+
         <div className="bg-glow" />
         <div className="bg-grid" />
         <div className="bg-fade" />

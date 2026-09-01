@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useActiveSection } from "@/lib/useActiveSection";
-import { ADMIN_URL } from "@/lib/site";
+import { ADMIN_URL, SIBLING_SITES } from "@/lib/site";
 
 type Link = { label: string; href: string };
 
@@ -114,8 +114,35 @@ export default function MobileMenu({ links }: { links: Link[] }) {
         </ul>
       </nav>
 
-      {/* Below the section links and visually separated: it isn't a place
-          visitors are meant to go, so it shouldn't compete with them. */}
+      {/* The desktop Courses dropdown is hidden below lg, so the sibling sites
+          live here instead. Section links above move you within this page;
+          these leave it, hence the separation. */}
+      <div className="mt-8 border-t border-line pt-8">
+        <p className="px-4 font-mono text-[10.5px] uppercase tracking-[0.12em] text-muted">
+          Also from EduFulness
+        </p>
+        <ul className="mt-3 list-none space-y-0.5">
+          {SIBLING_SITES.map((course) => (
+            <li key={course.href}>
+              <a
+                href={course.href}
+                onClick={() => setOpen(false)}
+                className="flex items-center gap-3 rounded-xl px-4 py-3 text-[15px] font-medium transition-colors hover:bg-surface-2"
+              >
+                <span
+                  aria-hidden
+                  className="h-2 w-2 shrink-0 rounded-full"
+                  style={{ backgroundColor: course.dot }}
+                />
+                {course.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Below everything and visually separated: it isn't a place visitors are
+          meant to go, so it shouldn't compete with them. */}
       <a
         href={ADMIN_URL}
         onClick={() => setOpen(false)}

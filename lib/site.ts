@@ -23,6 +23,29 @@ export const WHATSAPP_URL = "https://whatsapp.com/channel/0029Val125n2UPBNAPAprU
 export const WEBSITE_URL = "https://www.edufulness.com";
 
 /**
+ * The other course sites in the family. Each site lists its siblings, so
+ * visitors can move between them without going back to the parent site.
+ *
+ * Absolute URLs, not root-relative: these live in different folders and may
+ * later move to subdomains, at which point a relative path would break.
+ * When a new course launches, add it here in every sibling's copy of this file.
+ */
+export const SIBLING_SITES = [
+  {
+    label: "Data Structures and Algorithms",
+    href: "https://edufulness.com/dsa/",
+    // Each course carries a dot colour so the menu is scannable by more than
+    // text alone. Uses the --hex-* variables, so it follows the theme.
+    dot: "var(--hex-primary-2)",
+  },
+  {
+    label: "Building Agentic AI Applications",
+    href: "https://edufulness.com/agentic-ai/",
+    dot: "var(--hex-lime)",
+  },
+];
+
+/**
  * Prefixes a file in public/ with the deploy sub-path.
  *
  * Necessary because Next applies basePath to its own bundles but passes

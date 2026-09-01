@@ -26,8 +26,10 @@ export default function Logo({ className = "" }: { className?: string }) {
       // An aria-label replaces ALL inner content for screen readers, so the
       // strapline has to be repeated here or it is never announced. Naming the
       // destination matters more than usual, since the link leaves the page.
-      aria-label="EduFulness — Azure Data Engineering Course. Go to edufulness.com"
-      className={`inline-flex min-w-0 shrink items-center gap-2.5 rounded-lg transition-opacity hover:opacity-80 ${className}`}
+      // Spelled out here even though the visible text is the initialism: a
+      // screen reader would announce "ADE" as a word, which means nothing.
+      aria-label="EduFulness — Azure Data Engineering. Go to edufulness.com"
+      className={`inline-flex min-w-0 shrink items-center gap-1 rounded-lg transition-opacity hover:opacity-80 ${className}`}
     >
       <Image
         src={asset("/efnlogo.png")}
@@ -38,18 +40,26 @@ export default function Logo({ className = "" }: { className?: string }) {
         className="w-[112px] shrink-0 select-none sm:w-[132px]"
       />
       {/*
-        Hidden below xl. At 132px the mark plus this strapline plus the Live
-        Classes pill and the Enroll button overflow anything narrower than a
-        laptop, and the nav is the one row on the page that cannot wrap.
+        A literal slash rather than a border-left, echoing the "/ Section name"
+        eyebrow used throughout the page. Dimmer than the label so it reads as a
+        separator, not a character in the text.
+
+        "ADE" rather than "Data Engineering": the full label cost ~110px in the
+        one row on the page that cannot wrap, and that width is what forced the
+        strapline to hide below xl. At ~34px the initialism fits from sm up, so
+        the course identity is now visible on nearly every viewport instead of
+        only on large desktops — a better trade than a longer label nobody on a
+        laptop ever saw.
+
+        `truncate` is kept as a floor rather than `whitespace-nowrap`: with
+        nowrap this overflowed its box and the nav links rendered on top of it.
+        Worst case is now an ellipsis, never a collision.
       */}
-      {/* A literal slash rather than a border-left, echoing the "/ Section
-          name" eyebrow used throughout the page. Dimmer than the label so it
-          reads as a separator, not a character in the text. */}
-      <span className="hidden whitespace-nowrap text-[13px] font-medium leading-tight text-muted xl:inline">
-        <span aria-hidden className="mr-2 text-muted/50">
+      <span className="hidden min-w-0 truncate text-[13px] font-medium leading-tight text-muted sm:inline-block">
+        <span aria-hidden className="mr-1.5 text-muted/50">
           /
         </span>
-        Azure Data Engineering Course
+        ADE
       </span>
     </a>
   );

@@ -15,7 +15,8 @@ export default function Home() {
   return (
     <>
       <Nav />
-      <main className="relative z-10">
+      {/* id="main" is the skip link's target, and the footer's back-to-top. */}
+      <main id="main" className="relative z-10">
         <Hero />
         <Marquee />
         <Curriculum />
